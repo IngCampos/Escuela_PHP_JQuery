@@ -54,7 +54,7 @@ a:hover {
 	margin-bottom: 10px;
 }
 
-.formulario input[type="text"],
+.formulario input[type="number"],
 .formulario input[type="password"] {
 	padding: 15px;
 	font-family: 'Raleway', sans-serif;

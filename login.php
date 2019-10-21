@@ -9,26 +9,25 @@ if (isset($_SESSION['usuario'])) {
 
 // Comprobamos si ya han sido enviado los datos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$usuario = filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING);
-	$password = $_POST['password'];
-	$password = hash('sha512', $password);
+	$Id = $_POST['id'];
+	$Contraseña = $_POST['contraseña'];
+	// $contraseña = hash('sha512', $contraseña);
 
 	// Nos conectamos a la base de datos
 	try {
-		$conexion = new PDO('mysql:host=localhost;dbname=curso_login', 'root', '');
+		$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
 	} catch (PDOException $e) {
 		echo "Error:" . $e->getMessage();
 	}
-
-	$statement = $conexion->prepare('SELECT * FROM usuarios WHERE usuario = :usuario AND pass = :password');
+	$statement = $conexion->prepare('SELECT * FROM usuarios WHERE Id = :Id AND Pass = :Pass');
 	$statement->execute(array(
-			':usuario' => $usuario,
-			':password' => $password
+			':Id' => $Id,
+			':Pass' => $Contraseña
 		));
 
 	$resultado = $statement->fetch();
 	if ($resultado !== false) {
-		$_SESSION['usuario'] = $usuario;//para iniciar la sesion 
+		$_SESSION['usuario'] = $Id;//para iniciar la sesion 
 		header('Location: index.php');
 	} else {
 		$errores = '<li>Datos incorrectos</li>';
