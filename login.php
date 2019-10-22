@@ -19,15 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} catch (PDOException $e) {
 		echo "Error:" . $e->getMessage();
 	}
-	$statement = $conexion->prepare('SELECT * FROM usuarios WHERE Id = :Id AND Pass = :Pass');
+	$statement = $conexion->prepare('SELECT * FROM usuarios INNER JOIN tipo_usuario ON usuarios.Id_tipo_usuario=tipo_usuario.Id WHERE usuarios.Id = :Id AND usuarios.Pass = :Pass');
 	$statement->execute(array(
-			':Id' => $Id,
-			':Pass' => $Contraseña
-		));
-
+		':Id' => $Id,
+		':Pass' => $Contraseña
+	));
 	$resultado = $statement->fetch();
 	if ($resultado !== false) {
-		$_SESSION['usuario'] = $Id;//para iniciar la sesion 
+		$_SESSION['usuario'] = $resultado;
+		// Guarda la informacion del usuario para mas adelante no volver a consultar
 		header('Location: index.php');
 	} else {
 		$errores = '<li>Datos incorrectos</li>';
