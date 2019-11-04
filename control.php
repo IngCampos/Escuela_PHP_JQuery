@@ -11,9 +11,23 @@ if (isset($_SESSION['usuario'])) {
 		':Id_maestro' => $_SESSION['usuario']['0'],
 		':Id_clase' => $_GET['id_clase']
 	));
-	$resultado = $statement->fetch();
+	$usuariocorrespondiente = $statement->fetch();
 	if (isset($_POST["date"])) {
 		// si hay datos enviados por post hace lo siguiente
+		try {
+			$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
+		} catch (PDOException $e) {
+			echo "Error:" . $e->getMessage();
+		}
+		$statement = $conexion->prepare('SELECT * FROM asistencias WHERE Id_clase = :Id_clase and Fecha = :Fecha');
+		$statement->execute(array(
+			':Id_clase' => $_GET['id_clase'],
+			':Fecha' => $_POST["date"]
+		));
+		$fechanorepetida = $statement->fetch();
+		if(!$fechanorepetida){
+			
+		// comprueba que la fecha y la clase no existan antes en la BD
 		$fecha = $_POST["date"];
 		unset($_POST["date"]); 
 		// se guarda la fecha y se quita del arreglo de POST
@@ -28,7 +42,9 @@ if (isset($_SESSION['usuario'])) {
 			":Id_tipo_asistencia" => $asistencia));
 		}
 	}
-	if(!$resultado){
+	else echo "datos ya registrados";
+	}
+	if(!$usuariocorrespondiente){
 		// verifica que la clase a la que quiere entrar el maestro le pertenezca
 		// de lo contrario lo regresa al menu principal
 		header('Location: login.php');

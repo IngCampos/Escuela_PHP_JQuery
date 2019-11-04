@@ -6,10 +6,10 @@ require 'views/header.php';
 		<a href="cerrar.php">Cerrar Sesion</a>
 		<hr class="border">
 		<div class="contenido">
-		<h3>Nombre: <?php echo $resultado['nombre']; ?></h3>
-		<h3>Hora: <?php echo $resultado['hora']; ?></h3>
-		<h3>Grado: <?php echo $resultado['grado']; ?></h3>
-		<h3>Descripcion: <?php echo $resultado['descripcion']; ?></h3>
+		<h3>Nombre: <?php echo $usuariocorrespondiente['nombre']; ?></h3>
+		<h3>Hora: <?php echo $usuariocorrespondiente['hora']; ?></h3>
+		<h3>Grado: <?php echo $usuariocorrespondiente['grado']; ?></h3>
+		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?></h3>
 		<hr>
 		<form  method="post" action="<?php echo $_SERVER['PHP_SELF']."?id_clase=".$_GET['id_clase']; ?>">
 		Fecha: <input class="form-control" id="date" type="date" name="date" value="<?php echo date('Y').'-'.date('m').'-'.date('d');?>" required>
@@ -21,7 +21,7 @@ require 'views/header.php';
 		}
 		$statement = $conexion->prepare('SELECT usuarios.Nombres,usuarios.Apellidos, usuarios.Id FROM alumnos_clases INNER JOIN usuarios ON alumnos_clases.Id_alumno=usuarios.Id WHERE alumnos_clases.Id_clase = :Id ORDER BY usuarios.Id');
 		$statement->execute(array(
-			':Id' => $resultado['id']
+			':Id' => $usuariocorrespondiente['id']
 		));
 		$alumnos = $statement->fetch();
 		echo "<table ><tr><td>Alumno</td><td>Asistencia</td><td>Falta</td><td>Justificante</td><td>Retardo</td></tr>";
