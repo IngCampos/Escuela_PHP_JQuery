@@ -12,6 +12,7 @@ if (isset($_SESSION['usuario'])) {
 		':Id_clase' => $_GET['id_clase']
 	));
 	$usuariocorrespondiente = $statement->fetch();
+	$nuevosdatos = true; //variable que determinara si los datos ya se han registrado o no
 	if (isset($_POST["date"])) {
 		// si hay datos enviados por post hace lo siguiente
 		try {
@@ -41,8 +42,9 @@ if (isset($_SESSION['usuario'])) {
 			':Fecha' => $fecha,
 			":Id_tipo_asistencia" => $asistencia));
 		}
+		echo "<script>alert('Datos guardados exitosamente')</script>";
 	}
-	else echo "datos ya registrados";
+	else $nuevosdatos = false;
 	}
 	if(!$usuariocorrespondiente){
 		// verifica que la clase a la que quiere entrar el maestro le pertenezca

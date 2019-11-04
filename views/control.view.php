@@ -11,6 +11,7 @@ require 'views/header.php';
 		<h3>Grado: <?php echo $usuariocorrespondiente['grado']; ?></h3>
 		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?></h3>
 		<hr>
+		<?php if($nuevosdatos):?>
 		<form  method="post" action="<?php echo $_SERVER['PHP_SELF']."?id_clase=".$_GET['id_clase']; ?>">
 		Fecha: <input class="form-control" id="date" type="date" name="date" value="<?php echo date('Y').'-'.date('m').'-'.date('d');?>" required>
 		<?php
@@ -32,6 +33,9 @@ require 'views/header.php';
 		echo "</table>";
 		?>
 		<input type="submit" value="Registrar">
+	   <?php else:?>
+	   <label>Ya existen registros de esta clase y de este dia en la base de datos</label>
+		<?php endif ?>
 		</form>
 		<br>
 		<br>
