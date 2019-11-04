@@ -36,6 +36,8 @@ require 'header.php';
 		<?php if ($_SESSION['usuario']['Titulo']=="Administrador"): ?>
 	codigo en caso de ser administrador
 		<?php endif ?>
+		<center><h2>Libros</h2></center>
+		grado:<?php echo $_SESSION['usuario']['Grado']?>(ayuda parte libros)
 		</div>
 	</div>
 </body>
