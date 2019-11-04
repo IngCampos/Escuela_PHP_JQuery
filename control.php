@@ -12,6 +12,22 @@ if (isset($_SESSION['usuario'])) {
 		':Id_clase' => $_GET['id_clase']
 	));
 	$resultado = $statement->fetch();
+	if (isset($_POST["date"])) {
+		// si hay datos enviados por post hace lo siguiente
+		$fecha = $_POST["date"];
+		unset($_POST["date"]); 
+		// se guarda la fecha y se quita del arreglo de POST
+		foreach($_POST as $id => $asistencia){
+			// Recorre todos los registros para dar alta a los estudiantes
+			$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
+			$statement = $conexion->prepare('INSERT INTO asistencias(Id, Id_clase, Id_alumno, Fecha, Id_tipo_asistencia) VALUES(NULL , :Id_clase, :Id_alumno, :Fecha, :Id_tipo_asistencia)');
+			$statement->execute(array(
+			"Id_clase" => $_GET['id_clase'],
+			':Id_alumno' => $id,
+			':Fecha' => $fecha,
+			":Id_tipo_asistencia" => $asistencia));
+		}
+	}
 	if(!$resultado){
 		// verifica que la clase a la que quiere entrar el maestro le pertenezca
 		// de lo contrario lo regresa al menu principal
@@ -22,5 +38,4 @@ if (isset($_SESSION['usuario'])) {
 	header('Location: ../login.php');
 	die();
 }
-
 ?>

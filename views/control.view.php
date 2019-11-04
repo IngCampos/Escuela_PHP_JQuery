@@ -11,22 +11,22 @@ require 'views/header.php';
 		<h3>Grado: <?php echo $resultado['grado']; ?></h3>
 		<h3>Descripcion: <?php echo $resultado['descripcion']; ?></h3>
 		<hr>
-		<form>
-		Fecha: <input class="form-control" id="date" type="date" value="<?php echo date('Y').'-'.date('m').'-'.date('d');?>" required>
+		<form  method="post" action="<?php echo $_SERVER['PHP_SELF']."?id_clase=".$_GET['id_clase']; ?>">
+		Fecha: <input class="form-control" id="date" type="date" name="date" value="<?php echo date('Y').'-'.date('m').'-'.date('d');?>" required>
 		<?php
 		try {
 			$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
 		} catch (PDOException $e) {
 			echo "Error:" . $e->getMessage();
 		}
-		$statement = $conexion->prepare('SELECT usuarios.Nombres,usuarios.Apellidos FROM alumnos_clases INNER JOIN usuarios ON alumnos_clases.Id_alumno=usuarios.Id WHERE alumnos_clases.Id_clase = :Id');
+		$statement = $conexion->prepare('SELECT usuarios.Nombres,usuarios.Apellidos, usuarios.Id FROM alumnos_clases INNER JOIN usuarios ON alumnos_clases.Id_alumno=usuarios.Id WHERE alumnos_clases.Id_clase = :Id ORDER BY usuarios.Id');
 		$statement->execute(array(
 			':Id' => $resultado['id']
 		));
 		$alumnos = $statement->fetch();
-		echo "<table ><tr><td>Alumno</td><td>Asistencia</td><td>Falta</td><td>Retardo</td><td>Justificante</td></tr>";
+		echo "<table ><tr><td>Alumno</td><td>Asistencia</td><td>Falta</td><td>Justificante</td><td>Retardo</td></tr>";
 		while($alumnos!=null){
-			echo "<tr><td>".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."</td><td><input type='radio' name='".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."' value='A'></td><td><input type='radio' name='".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."' value='F'></td><td><input type='radio' name='".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."' value='R'></td><td><input type='radio' name='".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."' value='J'></td></tr>";
+			echo "<tr><td>".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."</td><td><input type='radio' name='".$alumnos["Id"]."' value=1 checked></td><td><input type='radio' name='".$alumnos["Id"]."' value=2></td><td><input type='radio' name='".$alumnos["Id"]."' value=3></td><td><input type='radio' name='".$alumnos["Id"]."' value=4></td></tr>";
 			$alumnos = $statement->fetch();
 		}
 		echo "</table>";
