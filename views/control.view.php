@@ -3,7 +3,7 @@ require 'views/header.php';
 ?>
 	<div class="contenedor">
 		<h1 class="titulo"><?php echo $_SESSION['usuario']['Nombres']." ".$_SESSION['usuario']['Apellidos']."(".$_SESSION['usuario']['Titulo'].")";?></h1>
-		<a href="cerrar.php">Cerrar Sesion</a>
+		<a href="cerrar.php">Cerrar Sesion</a><a style="float: right;" class="inico" href="index.php">Inicio</a>
 		<hr class="border">
 		<div class="contenido">
 		<h3>Nombre: <?php echo $usuariocorrespondiente['nombre']; ?></h3>
