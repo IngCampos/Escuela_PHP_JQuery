@@ -29,9 +29,12 @@ require 'header.php';
 
 		<p class="texto-registrate">
 			¿ Olvidaste tu contraseña ?
-			<a href="registrate.php">Pedir contraseña</a>
+			<a href="olvido_contraseña.php">Pedir contraseña</a>
 		</p>
-
+		<p class="texto-registrate">
+			Al utilizar esta aplicacion estas aceptando los 
+			<a href="terminosycondiciones.view.php">terminos y condiciones</a>
+		</p>
 	</div>
 </body>
 <?php 
