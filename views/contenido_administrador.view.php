@@ -8,9 +8,10 @@ try {
 $statement = $conexion->prepare('SELECT Id, Nombres, Apellidos, Grado, Pass FROM usuarios');
 $statement->execute();
 $usuarios = $statement->fetch();
+echo "<table ><tr><td>Id</td><td>Nombres</td><td>Apellidos</td><td>Grado</td><td>Pass</td></tr>";
+
 while($usuarios!=null){
-    echo "<pre>";
-    print_r($usuarios);
-    echo "</pre>";
-	$usuarios = $statement->fetch();
+    echo "<tr><td>".$usuarios["Id"]."</td><td>".$usuarios["Nombres"]."</td><td>".$usuarios["Apellidos"]."</td><td>".$usuarios["Grado"]."</td><td>".$usuarios["Pass"]."</td></tr>";
+    $usuarios = $statement->fetch();
 }
+echo "</table>";
