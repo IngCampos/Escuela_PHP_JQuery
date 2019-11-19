@@ -10,9 +10,7 @@ if (isset($_SESSION['usuario'])) {
 // Comprobamos si ya han sido enviado los datos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$Id = $_POST['id'];
-	$Contraseña = $_POST['contraseña'];
-	// $contraseña = hash('sha512', $contraseña);
-
+	$Contraseña = hash('sha512', 'escuela_bd' . $_POST['contraseña']);
 	// Nos conectamos a la base de datos
 	try {
 		$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
