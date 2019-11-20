@@ -14,4 +14,4 @@ while($usuarios!=null){
     echo "<tr><td>".$usuarios["Id"]."</td><td>".$usuarios["Nombres"]."</td><td>".$usuarios["Apellidos"]."</td><td>".$usuarios["Grado"]."</td><td>".$usuarios["Pass"]."</td></tr>";
     $usuarios = $statement->fetch();
 }
-echo "</table>";
+echo "</table><a href='libros.php'>Agregar libro</a>";
