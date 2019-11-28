@@ -11,9 +11,9 @@ $statement->execute(array(
 	//se pone 0 por que al haber dos campos con el nombre Id, el otro pasa a nombrarse 0
 ));
 $materias = $statement->fetch();
-echo "<table ><tr><td>Hora</td><td>Materia</td><td>Grado</td><td>Asistencias</td><td>Tareas</td></tr>";
+echo "<table ><tr><td>Hora</td><td>Materia</td><td>Grado</td><td>Asistencias</td></tr>";
 while($materias!=null){
-	echo "<tr><td>".$materias["Hora"]."</td><td>".$materias["Nombre"]."</td><td>".$materias["Grado"]."</td><td><a href='control.php?id_clase=".$materias["Id"]."'>Asistencias</a></td><td><a>Tareas</a></td></tr>";
+	echo "<tr><td>".$materias["Hora"]."</td><td>".$materias["Nombre"]."</td><td>".$materias["Grado"]."</td><td><a href='control.php?id_clase=".$materias["Id"]."'>Asistencias</a></td></tr>";
 	$materias = $statement->fetch();
 }
 echo "</table>";
