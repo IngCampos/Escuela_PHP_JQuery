@@ -11,6 +11,8 @@ if (isset($_SESSION['usuario'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$Id = $_POST['id'];
 	$Contraseña = hash('sha512', 'escuela_bd' . $_POST['contraseña']);
+	$Tiempo_tolerancia = 2;// dado en minutos, en caso de que el usuario se logea mal 5 veces en el mismo dispositivo 
+	$Intentos_tolerancia = 5; // intentos qe se le permitira un logeo mal en el tiempo pasado
 	// Nos conectamos a la base de datos
 	try {
 		$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
