@@ -9,7 +9,7 @@ if (isset($_SESSION['usuario'])) {
 
 // Comprobamos si ya han sido enviado los datos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$Id = $_POST['id'];
+	$Id = filter_var(strtolower($_POST['id']), FILTER_SANITIZE_STRING);
 	$Contraseña = hash('sha512', 'escuela_bd' . $_POST['contraseña']);
 	$Tiempo_tolerancia = 2;// dado en minutos, en caso de que el usuario se logea mal 5 veces en el mismo dispositivo 
 	$Intentos_tolerancia = 5; // intentos qe se le permitira un logeo mal en el tiempo pasado
@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		':Request_time'=> $_SERVER["REQUEST_TIME"] - ($Tiempo_tolerancia*60)
 	));
 	$numero_intentos = $intentos->fetch();
-	echo $numero_intentos["COUNT(*)"];
 	if($numero_intentos["COUNT(*)"]<$Intentos_tolerancia){
 		$statement = $conexion->prepare('SELECT * FROM usuarios INNER JOIN tipo_usuario ON usuarios.Id_tipo_usuario=tipo_usuario.Id WHERE usuarios.Id = :Id AND usuarios.Pass = :Pass');
 		$statement->execute(array(
@@ -50,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				':Id_usuario' => $Id,
 				':Dispositivo' => $_SERVER["HTTP_USER_AGENT"]
 			));
-			$errores = '<li>Datos incorrectos</li>';
+			$errores = '<li>Datos incorrectos</li><li>En caso de olvido de contraseña, contactar al departamento de sistemas.</li>';
 		}
 	}
 	else{
@@ -59,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			':Id_usuario' => $Id,
 			':Dispositivo' => $_SERVER["HTTP_USER_AGENT"]
 		));
-		$errores = '<li>El limite de tiempo a excedido, espere un momento por favor</li>';
+		$bloqueo_inputs =true;
+		$errores = '<li>El limite de intentos a excedido, espere un momento por favor, y refresque la pagina</li><li>En caso de olvido de contraseña, contactar al departamento de sistemas.</li>';
 	}
 }
 

@@ -108,26 +108,6 @@ a:hover {
 	margin-bottom: 10px;	
 }
 
-.formulario .submit-btn {
-	padding: 15px;
-	text-align: center;
-	width: 48px;
-	max-height: 48px
-	font-size: 18px;
-	line-height: 18px;
-	background: #679863;
-	display: inline-block;
-	color:#fff;
-	background: #769766;
-	cursor: pointer;
-
-	-webkit-border-radius: 0 3px 3px 0;
-	-moz-border-radius: 0 3px 3px 0;
-	-ms-border-radius: 0 3px 3px 0;
-	-o-border-radius: 0 3px 3px 0;
-	border-radius: 0 3px 3px 0;
-}
-
 .texto-registrate {
 	text-align: center;
 }
