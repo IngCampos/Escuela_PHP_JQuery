@@ -2,7 +2,7 @@
 require 'views/header.php';
 ?>
 	<div class="contenedor">
-		<h1 class="titulo"><?php echo $_SESSION['usuario']['Nombres']." ".$_SESSION['usuario']['Apellidos']."(".$_SESSION['usuario']['Titulo'].")";?></h1>
+		<h2>Pase de lista: <?php echo $_SESSION['usuario']['Nombres']." ".$_SESSION['usuario']['Apellidos'];?></h2>
 		<a href="cerrar.php">Cerrar Sesion</a><a style="float: right;" class="inico" href="index.php">Inicio</a>
 		<hr class="border">
 		<div class="contenido">
@@ -11,9 +11,12 @@ require 'views/header.php';
 		<h3>Grado: <?php echo $usuariocorrespondiente['grado']; ?></h3>
 		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?></h3>
 		<hr>
-		<?php if($nuevosdatos):?>
 		<form  method="post" action="<?php echo $_SERVER['PHP_SELF']."?id_clase=".$_GET['id_clase']; ?>">
-		Fecha: <input class="form-control" id="date" type="date" name="date" value="<?php echo date('Y').'-'.date('m').'-'.date('d');?>" required>
+		<div class="form-group">
+			Fecha: <input class="form-control" id="date" type="date" name="date" value="<?php echo date('Y').'-'.date('m').'-'.date('d');?>" required>
+			<button  type="submit" value="Registrar" class="btn btn-success"<?php if(isset($bloqueo_inputs))echo "disabled";?>>Registrar <i class="fa fa-save"></i></button>
+		</div>
+		<div class="form-group">
 		<?php
 		try {
 			$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
@@ -25,23 +28,20 @@ require 'views/header.php';
 			':Id' => $usuariocorrespondiente['id']
 		));
 		$alumnos = $statement->fetch();
-		echo "<table ><tr><td>Alumno</td><td>Asistencia</td><td>Falta</td><td>Justificante</td><td>Retardo</td></tr>";
+		echo "<table ><tr><td>Nombre</td><td>Asistencia</td><td>Falta</td><td>Justificante</td><td>Retardo</td></tr>";
 		while($alumnos!=null){
-			echo "<tr><td>".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."</td><td><input type='radio' name='".$alumnos["Id"]."' value=1 checked></td><td><input type='radio' name='".$alumnos["Id"]."' value=2></td><td><input type='radio' name='".$alumnos["Id"]."' value=3></td><td><input type='radio' name='".$alumnos["Id"]."' value=4></td></tr>";
+			echo "<tr><td>".$alumnos["Nombres"]." ".$alumnos["Apellidos"]."</td><td><center><input type='radio' name='".$alumnos["Id"]."' value=1 checked></center></td><td><center><input type='radio' name='".$alumnos["Id"]."' value=2></center></td><td><center><input type='radio' name='".$alumnos["Id"]."' value=3></center></td><td><center><input type='radio' name='".$alumnos["Id"]."' value=4></center></td></tr>";
 			$alumnos = $statement->fetch();
 		}
 		echo "</table>";
 		?>
-		<input type="submit" value="Registrar">
-	   <?php else:?>
-	   <label>Ya existen registros de esta clase y de este dia en la base de datos</label>
-		<?php endif ?>
-		</form>
-		<br>
-		<br>
-		<br>
-		<hr>
 		</div>
+	</form>
+	<hr>
+	<?php if(!$nuevosdatos):?>
+	<script>alert("Ya existen registros de esta clase y de este dia en la base de datos");</script>
+	<?php endif ?>
+	</div>
 	</div>
 </body>
 <?php 
