@@ -10,8 +10,8 @@ require 'header.php';
 			</div>
 
 			<div class="form-group">
-				<i class="icono izquierda fa fa-lock"></i><input class="password_btn" type="password" name="contraseña" placeholder="contraseña" required <?php if(isset($bloqueo_inputs))echo "disabled";?>>
-				<button  type="submit" class="btn btn-success" <?php if(isset($bloqueo_inputs))echo "disabled";?>></button>
+				<i class="icono izquierda fa fa-lock"></i><input class="password_btn" type="password" name="contraseña" placeholder="Contraseña" required <?php if(isset($bloqueo_inputs))echo "disabled";?>>
+				<button  type="submit" class="submit-btn fa fa-arrow-right" <?php if(isset($bloqueo_inputs))echo "disabled";?>></button>
 			</div>
 
 			<!-- Comprobamos si la variable errores esta seteada, si es asi mostramos los errores -->
