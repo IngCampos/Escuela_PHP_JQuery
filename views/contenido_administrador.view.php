@@ -1,4 +1,9 @@
+<center><h2>Libros</h2></center>
+<hr>
+<a class="fa fa-plus"href='libros/agregarlibro.php'>Agregar libro</a><br>
+<a class="fa fa-book" href='libros/libros.php'>Ver libros</a>
 <center><h2>Usuarios del sistema</h2></center>
+<hr>
 <?php 
 $Tiempo_tolerancia = 2;// dado en minutos, en caso de que el usuario se logea mal 5 veces en el mismo dispositivo 
 try {
@@ -22,4 +27,4 @@ while($usuarios!=null){
     echo "<tr><td>".$usuarios["Id"]."</td><td>".$usuarios["Nombres"]."</td><td>".$usuarios["Apellidos"]."</td><td>".$usuarios["Grado"]."</td><td>fallidos: ".$numero_intentos["COUNT(*)"]."</td><td>".substr($usuarios["Pass"],-15)."</td></tr>";
     $usuarios = $statement->fetch();
 }
-echo "</table><a href='libros/agregarlibro.php'>Agregar libro</a><br><a href='libros/libros.php'>Ver libros</a>";
+echo "</table>";
