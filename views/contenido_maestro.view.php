@@ -13,7 +13,7 @@ $statement->execute(array(
 $materias = $statement->fetch();
 echo "<table ><tr><td>Hora</td><td>Materia</td><td>Grado</td><td>Pase de lista</td><td>Asistencias</td><td></tr>";
 while($materias!=null){
-	echo "<tr><td>".$materias["Hora"]."</td><td>".$materias["Nombre"]."</td><td><center>".$materias["Grado"]."</center></td><td><center><a class='fa fa-edit' href='control.php?id_clase=".$materias["Id"]."'></a></center></td></tr>";
+	echo "<tr><td>".$materias["Hora"]."</td><td>".$materias["Nombre"]."</td><td><center>".$materias["Grado"]."</center></td><td><center><a class='fa fa-edit' href='control.php?id_clase=".$materias["Id"]."'></a></center></td><td><center><a class='fa fa-sticky-note' href='asistencias.php?id_clase=".$materias["Id"]."'></a></center></td></tr>";
 	$materias = $statement->fetch();
 }
 echo "</table>";

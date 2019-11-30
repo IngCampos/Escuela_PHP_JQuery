@@ -9,7 +9,8 @@ require 'views/header.php';
 		<h3>Nombre: <?php echo $usuariocorrespondiente['nombre']; ?></h3>
 		<h3>Hora: <?php echo $usuariocorrespondiente['hora']; ?></h3>
 		<h3>Grado: <?php echo $usuariocorrespondiente['grado']; ?></h3>
-		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?></h3>
+		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?>
+		<center><a class='fa fa-sticky-note' href='asistencias.php?id_clase=<?php echo $_GET['id_clase'];?>'>Ver asistencias</a></center></h3>
 		<hr>
 		<form  method="post" action="<?php echo $_SERVER['PHP_SELF']."?id_clase=".$_GET['id_clase']; ?>">
 		<div class="form-group">
