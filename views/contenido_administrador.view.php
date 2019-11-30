@@ -1,7 +1,3 @@
-<center><h2>Libros</h2></center>
-<hr>
-<a class="fa fa-plus"href='libros/agregarlibro.php'>Agregar libro</a><br>
-<a class="fa fa-book" href='libros/libros.php'>Ver libros</a>
 <center><h2>Usuarios del sistema</h2></center>
 <hr>
 <?php 
