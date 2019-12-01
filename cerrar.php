@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+session_start();
 	try {
 		$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
 	} catch (PDOException $e) {

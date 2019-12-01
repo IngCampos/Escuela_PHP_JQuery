@@ -1,4 +1,6 @@
-<?php session_start();
+<?php 
+session_start();
+require 'session_cache_expire().php';
 
 // Comprobamos si ya tiene una sesion
 # Si ya tiene una sesion redirigimos al contenido, para que no pueda acceder al formulario
@@ -39,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				':Id_usuario' => $Id,
 				':Dispositivo' => $_SERVER["HTTP_USER_AGENT"]
 			));
+			// Guardado del tiempo para el manejo de su caducidad
+			$_SESSION["timeout"] = time();
 			$_SESSION['usuario'] = $resultado;
 			// Guarda la informacion del usuario para mas adelante no volver a consultar
 			header('Location: index.php');
