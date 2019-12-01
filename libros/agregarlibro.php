@@ -1,4 +1,15 @@
 <html>
+<?php session_start();
+
+// Comprobamos tenga sesion y sea administrador, si no entonces redirigimos y MATAMOS LA EJECUCION DE LA PAGINA.
+if (isset($_SESSION['usuario']) && $_SESSION['usuario']['Titulo']=="Administrador") {
+	
+} else {
+	header('Location: ../login.php');
+	die();
+}
+?>
+
 <head>
 <!--<link rel="stylesheet" href="estilo5.css">-->
 <link rel="ICON"  type="iMAGEN/PNG" href="sep.png">
@@ -96,10 +107,14 @@ else
 		}
 }
 ?>
+
 <table> <tr><td align="center"><div id= "result1" align="center"></div></td></tr></table>
 <form enctype="multipart/form-data" method="post" id="formulario" action="">
 <h1 align="center" class="titulo">ADMINISTRACI&Oacute;N DE LIBROS</h1>
+<a class="inico" href="../index.php">Inicio</a><a  style="float: right;"  href="../cerrar.php">Cerrar Sesion</a>
+<br>
 <hr class="border">
+<br>
 <table align="center">
 <tr><td class="cajonin" align= "right">ISBN:</td><td><INPUT class="cajon" type="text" id="isbn" name="isbn"  onkeyup="autollen()" maxlength="13" value="<?= isset($_POST['isbn']) ? $_POST['isbn'] : ''; ?>" ></td></tr>
 <tr><td class="cajonin" align= "right">NOMBRE:</td><td><INPUT class="cajon" type="text" id="nomlibro" name="nomlibro"  value="<?= isset($_POST['nomlibro']) ? $_POST['nomlibro'] : ''; ?>"></td></tr>
@@ -142,7 +157,7 @@ else
 				$conexion->close();
 				?>
 	</SELECT></td></tr>
-	<tr><td align= "right" class="cajonin">ARCHIVO:</td><td colspan="1" align="centrar"><input type="file" id="ruta" name="ruta" ></td></tr>
+	<tr><td align= "right" class="cajonin">ARCHIVO:</td><td colspan="1" align="centrar"><input type="file" id="ruta" name="ruta" accept="application/pdf"></td></tr>
 </table>
 <table align="center">
 	<tr><td  align="center"><input type="submit" class="button" value="SUBIR / ACTUALIZAR" name="SUBIR"> <td  align="right"><input type="submit" class="button" onclick="return ConfirmDelete()" value="ELIMINAR" name="ELIMINAR"></td></tr>

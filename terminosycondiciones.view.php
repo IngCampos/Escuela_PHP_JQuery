@@ -60,6 +60,43 @@ require 'views/header.php';
 				</div>
 			</div>
 		</div>
+<!-- aviso de privacidad libros -->
+<hr>
+		<div class="accordion" id="accordionExample">
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h2 class="mb-0">
+						<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							USO DE LIBROS
+						</button>
+					</h2>
+				</div>
+				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+					<div class="card-body btn-link">
+						<h3 align="center">Aviso de privacidad de conformidad con la ley.</h3>
+						<p align="justify"><b>Te damos la bienvenida al servicio de Libros de Texto en Línea de La Comisión Nacional de Libros de Texto Gratuito (Conaliteg – ubicado en Rafael Checa No. 2, Colonia San Ángel, Álvaro Obregón, Ciudad de México, C.P. 01000 Tel: (55) 54-81-04-00),</b> ponemos a disposición de los estudiantes y maestros el catálogo de libros de texto gratuitos en donde podrás disfrutar y conocer material antiguo, así como material nuevo y actualizado.</p><br>
+						<p align="justify"><b>Uso de nuestro servicio</b></p>
+						<p align="justify">Al usar nuestros servicios debes seguir las políticas que se presentan en este documento.</p><br>
+						<p align="justify">No debes usar nuestros servicios de forma inadecuada. Por ejemplo, no debes interferir con dichos Servicios ni intentar acceder a ellos usando un método distinto a la interfaz y a las instrucciones proporcionadas por nosotros.
+											Solo puedes usar el servicio en la medida que la ley lo permita, en este caso antes de reproducir información ofrecida, deberás observar si tiene derechos reservados y respetarlos en términos de las normas relativas a derechos de autor y propiedad industrial. Adicionalmente el usuario que reproduzca o procese información ofrecida deberá referir la localización electrónica y fecha en que se realizó la consulta de la información. El usuario se compromete a respetar y dejar a salvo los derechos de terceros sobre los contenidos que se contengan, en términos de la Ley aplicable, por lo que, para su uso, usted deberá de obtener las autorizaciones correspondientes directamente de los titulares de los derechos.</p><br>
+						<p align="justify">Nuestros Servicios están disponibles en diferentes dispositivos. No utilices esos Servicios de un modo que pueda distraerte y que te impida cumplir las leyes de tráfico o de seguridad.</p><br>
+						<p align="justify"><b>Responsabilidad por nuestros servicios</b></p><br>
+						<p align="justify">En ningún caso, ni por nuestra parte ni nuestros proveedores y distribuidores serán responsables por cualquier pérdida o daño que no sean previsibles de forma razonable.</p><br>
+						<p align="justify">Reconocemos que puedes tener derechos legales como consumidor en algunos países. Si usas los Servicios con fines personales, ninguna de las disposiciones establecidas en estas condiciones ni en ninguna de las condiciones adicionales limitará los derechos legales del consumidor.</p><br>
+						
+						<p align="justify"><b>Uso de nuestros Servicios por parte de empresas</b></p><br>
+						<p align="justify">Si usas los Servicios en nombre de una empresa, la empresa acepta estas condiciones. Se nos eximirá de responsabilidades y a nuestros filiales, directivos, agentes y empleados por las reclamaciones, demandas o acciones legales que se puedan derivar del uso de los Servicios o de la infracción de estas condiciones o que estén relacionados con los mismos, incluidos cualesquiera responsabilidad o gasto que se deriven de las reclamaciones, pérdidas, daños, demandas, juicios, costes procesales y honorarios de abogados.</p><br>
+						<p align="justify"><b>Nuestras condiciones pueden ser modificadas, substrayendo o agregando cuestiones que afectan el servicio o la legislación del mismo, te recomendamos que consultes las condiciones de forma periódica.</b></p><br>
+						<p align="justify">Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad, para la atención de novedades legislativas, políticas internas o nuevos requerimientos para la prestación u ofrecimiento de nuestros servicios o productos.</p></br>
+						<p align="justify">Estas modificaciones estarán disponibles al público a través de nuestra página de internet.</p></br>
+						<p align="justify">Queda bajo responsabilidad del usuario leer periódicamente las políticas de privacidad para estar al tanto de dichas modificaciones.</p></br>
+						<p align="justify"><b>Aceptación de término</b></p></br>
+						<p align="justify">Esta declaración de Confidencialidad / Privacidad está sujeta a los términos y condiciones del sitio web de Libros de Texto en Línea de La Comisión Nacional de Libros de Texto Gratuito antes descrito, lo cual constituye un acuerdo legal entre el usuario y servicio de Libros de Texto en Línea de La Comisión Nacional de Libros de Texto Gratuito. Si el usuario utiliza los servicios Libros de Texto en Línea de La Comisión Nacional de Libros de Texto Gratuito, significa que ha leído, entendido y acordado los términos antes expuestos.</p></br>
+						
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 <?php
 require 'views/footer.php';

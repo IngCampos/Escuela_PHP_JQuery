@@ -44,6 +44,27 @@ body {
   background: #D58110;
 }
 
+.buttonch {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #B8711B;
+  width: 200px;
+  height: 40px;
+  margin: 20px;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.buttonch:hover,.form button:active,.form button:focus {
+  background: #D58110;
+}
+
 a {
 	text-decoration: none;
 	color:#B8711B;
@@ -127,7 +148,7 @@ a:hover {
 }
 
 .slider {
-	width: 95%;
+	width: 75%;
 	margin: auto;
 	overflow: hidden;
 

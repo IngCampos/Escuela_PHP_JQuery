@@ -1,5 +1,6 @@
 <?php
 if(isset($_FILES["ruta"])){
+$myMaxFileSize = 15200;
 include("./conexion.php");
 	$isbn=$_POST["isbn"];
 	$file=$_FILES["ruta"];
@@ -7,6 +8,7 @@ include("./conexion.php");
 	$tipo=$file["type"];
 	$ruta_provisional=$file["tmp_name"];
 	$size=$file["size"];
+	if($size>$myMaxFileSize){
 	$carpeta="files/";
 	
 	$src=$carpeta.$nombre;
@@ -33,7 +35,7 @@ if($hayisbn==""){
 			echo "Error: " . $conexion->error;
 			}
 		}	
+	}else{echo "<script type=\"text/javascript\">alert(\"!SOLO SE PUEDEN SUBIR ARCHIVOS MENORES A 1.5 Mb!\");</script>";}
 	//echo $NoConvo."<img src='$src'>";
-	
 } 
 ?>

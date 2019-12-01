@@ -9,7 +9,7 @@ $dato = mysqli_fetch_array($result);
 if($dato['nom_libro']==""){
 	$selec="0";
 $data = array (
-'nomlibro' =>$dato['nom_libro'],
+'nomlibro' =>utf8_encode($dato['nom_libro']),
 'grado' =>$selec,
 'mate' =>$selec
 );
@@ -23,7 +23,7 @@ $consultamate=$conexion->query("SELECT Nombre from materias WHERE Id=".$dato['id
 			$idmate=utf8_encode($ex['Nombre']);	
 //$dato['id_materia']=$idmate;
 $data = array (
-'nomlibro' =>$dato['nom_libro'],
+'nomlibro' =>utf8_encode($dato['nom_libro']),
 'grado' =>$dato['grado'],
 'mate' =>$idmate
 );
