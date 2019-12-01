@@ -8,7 +8,26 @@ require 'header.php';
 			<div class="form-group">
 				<i class="icono izquierda fa fa-user"></i><input class="usuario" type="number" name="id" placeholder="Numero de control" required <?php if(isset($bloqueo_inputs))echo "disabled";?>>
 			</div>
-
+<style>
+	.submit-btn {
+	padding: 15px;
+	text-align: center;
+	width: 48px;
+	max-height: 48px
+	font-size: 18px;
+	line-height: 18px;
+	background: #679863;
+	display: inline-block;
+	color:#fff;
+	background: #769766;
+	cursor: pointer;
+	-webkit-border-radius: 0 3px 3px 0;
+	-moz-border-radius: 0 3px 3px 0;
+	-ms-border-radius: 0 3px 3px 0;
+	-o-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+}
+	</style>
 			<div class="form-group">
 				<i class="icono izquierda fa fa-lock"></i><input class="password_btn" type="password" name="contraseña" placeholder="Contraseña" required <?php if(isset($bloqueo_inputs))echo "disabled";?>>
 				<button  type="submit" class="submit-btn fa fa-arrow-right" <?php if(isset($bloqueo_inputs))echo "disabled";?>></button>
