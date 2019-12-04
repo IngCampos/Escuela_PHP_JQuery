@@ -10,9 +10,9 @@ require 'views/header.php';
 		<h3>Hora: <?php echo $usuariocorrespondiente['hora']; ?></h3>
 		<h3>Grado: <?php echo $usuariocorrespondiente['grado']; ?></h3>
 		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?>
-		<center><a class='fa fa-sticky-note' href='asistencias.php?id_clase=<?php echo $_GET['id_clase'];?>'>Ver asistencias</a></center></h3>
+		<center><a class='fa fa-sticky-note' href='asistencias.php?id_clase=<?php echo filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING);?>'>Ver asistencias</a></center></h3>
 		<hr>
-		<form  method="post" action="<?php echo $_SERVER['PHP_SELF']."?id_clase=".$_GET['id_clase']; ?>">
+		<form  method="post" action="<?php echo $_SERVER['PHP_SELF']."?id_clase=".filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING); ?>">
 		<div class="form-group">
 			Fecha: <input class="form-control" id="date" type="date" name="date" value="<?php echo date('Y').'-'.date('m').'-'.date('d');?>" required>
 			<button  type="submit" value="Registrar" class="btn btn-success"<?php if(isset($bloqueo_inputs))echo "disabled";?>>Registrar <i class="fa fa-save"></i></button>

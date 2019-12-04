@@ -2,7 +2,7 @@
    // Comprobar si $_SESSION["timeout"] está establecida
    if(isset($_SESSION["timeout"])){
        // Establecer tiempo de vida de la sesión en segundos
-       $inactividad = 360;
+       $inactividad = 420;
        // Calcular el tiempo de vida de la sesión (TTL = Time To Live)
        $sessionTTL = time() - $_SESSION["timeout"];
        $tiempo_restante =$inactividad-$sessionTTL;

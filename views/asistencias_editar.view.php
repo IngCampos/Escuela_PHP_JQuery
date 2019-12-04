@@ -13,10 +13,10 @@ require 'views/header.php';
 		<h3>Situacion: <?php echo $alumnos['Situacion de Vigencia']; ?></h3>
 		<h3>Correo Electronico: <?php echo $alumnos['Correo Electronico']; ?></h3>
 		<h3>
-			<center><a class='fa fa-sticky-note' href='asistencias.php?id_clase=<?php echo $_GET['id_clase']; ?>'>Ver asistencias</a></center>
+			<center><a class='fa fa-sticky-note' href='asistencias.php?id_clase=<?php echo filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING); ?>'>Ver asistencias</a></center>
 		</h3>
 		<hr>
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . "?id_clase=" . $_GET['id_clase'] . "&id_alumno=" . $_GET['id_alumno']; ?>">
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . "?id_clase=" . filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING) . "&id_alumno=" . $_GET['id_alumno']; ?>">
 			<?php
 			try {
 				$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');

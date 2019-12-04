@@ -10,7 +10,7 @@ require 'views/header.php';
 		<h3>Hora: <?php echo $usuariocorrespondiente['hora']; ?></h3>
 		<h3>Grado: <?php echo $usuariocorrespondiente['grado']; ?></h3>
 		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?>
-		<center><a class='fa fa-edit' href='control.php?id_clase=<?php echo $_GET['id_clase'];?>'>Pasar lista</a></center></h3>
+		<center><a class='fa fa-edit' href='control.php?id_clase=<?php echo filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING);?>'>Pasar lista</a></center></h3>
 		<hr>
 		<?php
 		try {
@@ -29,28 +29,28 @@ require 'views/header.php';
 			$statement2 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=1 and Id_clase = :Id_clase');
 			$statement2->execute(array(
 				':Id' => $alumnos['Id'],
-				':Id_clase' => $_GET['id_clase']
+				':Id_clase' =>  filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
 			$asistencias = $statement2->fetch();
 
 			$statement3 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=2 and Id_clase = :Id_clase');
 			$statement3->execute(array(
 				':Id' => $alumnos['Id'],
-				':Id_clase' => $_GET['id_clase']
+				':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
 			$faltas = $statement3->fetch();
 
 			$statement4 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=3 and Id_clase = :Id_clase');
 			$statement4->execute(array(
 				':Id' => $alumnos['Id'],
-				':Id_clase' => $_GET['id_clase']
+				':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
 			$justificantes = $statement4->fetch();
 
 			$statement5 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=4 and Id_clase = :Id_clase');
 			$statement5->execute(array(
 				':Id' => $alumnos['Id'],
-				':Id_clase' => $_GET['id_clase']
+				':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
 			$retardos = $statement5->fetch();
 			$total_dias = $asistencias['cantidad'] + $faltas['cantidad'] + $retardos['cantidad'] + $justificantes['cantidad'];

@@ -29,7 +29,7 @@ if (isset($_SESSION['usuario'])) {
 		if(!$alumnos) {
 			header('Location: login.php');
 		}else
-			if(isset($_POST)){
+			if($_POST!=null){
 				foreach($_POST as $fecha => $asistencia){
 				// Recorre todos los registros para modificar las asistencias
 			$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
@@ -39,6 +39,7 @@ if (isset($_SESSION['usuario'])) {
 			':Id_alumno' => filter_var(strtolower($_GET['id_alumno']), FILTER_SANITIZE_STRING),
 			':Asistencia' => $asistencia));
 				}
+				header('Location: asistencias.php?id_clase='.$_GET['id_clase']);
 			}
 		require 'views/asistencias_editar.view.php';
 	}
