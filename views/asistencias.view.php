@@ -54,7 +54,10 @@ require 'views/header.php';
 			));
 			$retardos = $statement5->fetch();
 			$total_dias = $asistencias['cantidad'] + $faltas['cantidad'] + $retardos['cantidad'] + $justificantes['cantidad'];
-			echo "<tr><td>" . $alumnos["Nombres"] . " " . $alumnos["Apellidos"] . "</td><td><center>" . $asistencias['cantidad'] . "</center></td><td><center>" . $faltas['cantidad'] . "</center></td><td><center>" . $justificantes['cantidad'] . "</center></td><td><center>" . $retardos['cantidad'] . "</center></td></tr>";
+			echo "<tr><td>" . $alumnos["Nombres"] . " " . $alumnos["Apellidos"] . "</td><td><center>" . $asistencias['cantidad'] . "</center></td><td><center>" . $faltas['cantidad'] . "</center></td><td><center>" . $justificantes['cantidad'] . "</center></td><td><center>" . $retardos['cantidad'] . "</center></td>";
+			if($total_dias>0)
+			echo "<td><center><a class='fa fa-edit' href='asistencias_editar.php?id_clase=".$_GET['id_clase']."&id_alumno=".$alumnos["Id"]."'></a></center></td>";
+			echo "</tr>";
 			$alumnos = $statement->fetch();
 		}
 		echo "</table><center>Dias en total: " . $total_dias . "</center>";
