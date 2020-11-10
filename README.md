@@ -1,2 +1,3 @@
-# Pagina_Anduaga
-Computo en la nube y niebla octubre 2019
+# Control de asistencias PHP
+
+Proyecto escolar con PHP vanilla mejorado

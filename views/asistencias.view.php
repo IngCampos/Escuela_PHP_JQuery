@@ -3,64 +3,65 @@ require 'views/header.php';
 ?>
 <div class="contenedor">
 	<h2>Registro pase de lista: <?php echo $_SESSION['usuario']['Nombres'] . " " . $_SESSION['usuario']['Apellidos']; ?></h2>
-	<a href="cerrar.php">Cerrar Sesion</a><a style="float: right;" class="inico" href="index.php">Inicio</a>
+	<a href="logout.php">Cerrar Sesi&oacute;n</a><a style="float: right;" class="inico" href="index.php">Inicio</a>
 	<hr class="border">
 	<div class="contenido">
-		<h3>Nombre: <?php echo $usuariocorrespondiente['nombre']; ?></h3>
-		<h3>Hora: <?php echo $usuariocorrespondiente['hora']; ?></h3>
-		<h3>Grado: <?php echo $usuariocorrespondiente['grado']; ?></h3>
-		<h3>Descripcion: <?php echo $usuariocorrespondiente['descripcion']; ?>
-		<center><a class='fa fa-edit' href='control.php?id_clase=<?php echo filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING);?>'>Pasar lista</a></center></h3>
+		<h3>Nombre: <?php echo $user['nombre']; ?></h3>
+		<h3>Hora: <?php echo $user['hora']; ?></h3>
+		<h3>Grado: <?php echo $user['grado']; ?></h3>
+		<h3>Descripcion: <?php echo $user['descripcion']; ?>
+			<center><a class='fa fa-edit' href='control.php?id_clase=<?php echo filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING); ?>'>Pasar lista</a></center>
+		</h3>
 		<hr>
 		<?php
 		try {
-			$conexion = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
+			$connection = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
 		} catch (PDOException $e) {
 			echo "Error:" . $e->getMessage();
 		}
-		$statement = $conexion->prepare('SELECT usuarios.Nombres,usuarios.Apellidos, usuarios.Id FROM alumnos_clases INNER JOIN usuarios ON alumnos_clases.Id_alumno=usuarios.Id WHERE alumnos_clases.Id_clase = :Id ORDER BY usuarios.Id');
+		$statement = $connection->prepare('SELECT usuarios.Nombres,usuarios.Apellidos, usuarios.Id FROM alumnos_clases INNER JOIN usuarios ON alumnos_clases.Id_alumno=usuarios.Id WHERE alumnos_clases.Id_clase = :Id ORDER BY usuarios.Id');
 		$statement->execute(array(
-			':Id' => $usuariocorrespondiente['id']
+			':Id' => $user['id']
 		));
-		$alumnos = $statement->fetch();
+		$students = $statement->fetch();
 		echo "<table ><tr><td>Nombre</td><td>Asistencias</td><td>Faltas</td><td>Justificantes</td><td>Retardos</td></tr>";
-		while ($alumnos != null) {
+		while ($students != null) {
 			//en el proceso determina el numero de asistencias, faltas, etc.
-			$statement2 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=1 and Id_clase = :Id_clase');
+			$statement2 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=1 and Id_clase = :Id_clase');
 			$statement2->execute(array(
-				':Id' => $alumnos['Id'],
+				':Id' => $students['Id'],
 				':Id_clase' =>  filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
-			$asistencias = $statement2->fetch();
+			$assistance = $statement2->fetch();
 
-			$statement3 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=2 and Id_clase = :Id_clase');
+			$statement3 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=2 and Id_clase = :Id_clase');
 			$statement3->execute(array(
-				':Id' => $alumnos['Id'],
+				':Id' => $students['Id'],
 				':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
-			$faltas = $statement3->fetch();
+			$absences = $statement3->fetch();
 
-			$statement4 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=3 and Id_clase = :Id_clase');
+			$statement4 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=3 and Id_clase = :Id_clase');
 			$statement4->execute(array(
-				':Id' => $alumnos['Id'],
+				':Id' => $students['Id'],
 				':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
-			$justificantes = $statement4->fetch();
+			$exculpatory = $statement4->fetch();
 
-			$statement5 = $conexion->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=4 and Id_clase = :Id_clase');
+			$statement5 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=4 and Id_clase = :Id_clase');
 			$statement5->execute(array(
-				':Id' => $alumnos['Id'],
+				':Id' => $students['Id'],
 				':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING)
 			));
-			$retardos = $statement5->fetch();
-			$total_dias = $asistencias['cantidad'] + $faltas['cantidad'] + $retardos['cantidad'] + $justificantes['cantidad'];
-			echo "<tr><td>" . $alumnos["Nombres"] . " " . $alumnos["Apellidos"] . "</td><td><center>" . $asistencias['cantidad'] . "</center></td><td><center>" . $faltas['cantidad'] . "</center></td><td><center>" . $justificantes['cantidad'] . "</center></td><td><center>" . $retardos['cantidad'] . "</center></td>";
-			if($total_dias>0)
-			echo "<td><center><a class='fa fa-edit' href='asistencias_editar.php?id_clase=".$_GET['id_clase']."&id_alumno=".$alumnos["Id"]."'></a></center></td>";
+			$delays = $statement5->fetch();
+			$total_days = $assistance['cantidad'] + $absences['cantidad'] + $delays['cantidad'] + $exculpatory['cantidad'];
+			echo "<tr><td>" . $students["Nombres"] . " " . $students["Apellidos"] . "</td><td><center>" . $assistance['cantidad'] . "</center></td><td><center>" . $absences['cantidad'] . "</center></td><td><center>" . $exculpatory['cantidad'] . "</center></td><td><center>" . $delays['cantidad'] . "</center></td>";
+			if ($total_days > 0)
+				echo "<td><center><a class='fa fa-edit' href='assistance_edit.php?id_clase=" . $_GET['id_clase'] . "&id_alumno=" . $students["Id"] . "'></a></center></td>";
 			echo "</tr>";
-			$alumnos = $statement->fetch();
+			$students = $statement->fetch();
 		}
-		echo "</table><center>Dias en total: " . $total_dias . "</center>";
+		echo "</table><center>Dias en total: " . $total_days . "</center>";
 		?>
 		<hr>
 	</div>
