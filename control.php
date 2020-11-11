@@ -2,31 +2,39 @@
 session_start();
 require 'session_cache_expire().php';
 // Comprobamos tenga sesion, si no entonces redirigimos y MATAMOS LA EJECUCION DE LA PAGINA.
-if (isset($_SESSION['usuario'])) {
+if (isset($_SESSION['user'])) {
 	try {
-		$connection = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
+		$connection = new PDO('mysql:host=localhost;dbname=attendance_school', 'root', '');
 	} catch (PDOException $e) {
-		echo "Error:" . $e->getMessage();
+		echo "Error: {$e->getMessage()}";
 	}
-	$statement = $connection->prepare('SELECT clases.id, materias.nombre, materias.descripcion, materias.grado, clases.hora FROM clases INNER JOIN materias ON clases.Id_materia=materias.Id WHERE clases.Id_maestro = :Id_maestro and materias.Id = :Id_clase');
+	$statement = $connection->prepare(
+		'SELECT class.id, subjects.name, subjects.description, subjects.grade, class.hour 
+		FROM class INNER JOIN subjects ON class.subject_id=subjects.id 
+		WHERE class.teacher_id = :teacher_id and subjects.id = :class_id'
+	);
 	$statement->execute(array(
-		':Id_maestro' => $_SESSION['usuario']['0'],
-		':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING),
+		':teacher_id' => $_SESSION['user']['0'],
+		':class_id' => filter_var(strtolower($_GET['class_id']), FILTER_SANITIZE_STRING),
 	));
 	$user = $statement->fetch();
 	$is_new_data = true; //variable que determinara si los datos ya se han registrado o no
 	if (isset($_POST["date"])) {
 		// si hay datos enviados por post hace lo siguiente
 		try {
-			$connection = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
+			$connection = new PDO('mysql:host=localhost;dbname=attendance_school', 'root', '');
 		} catch (PDOException $e) {
-			echo "Error:" . $e->getMessage();
+			echo "Error: {$e->getMessage()}";
 		}
-		$statement = $connection->prepare('SELECT * FROM asistencias WHERE Id_clase = :Id_clase and Fecha = :Fecha');
+		$statement = $connection->prepare(
+			'SELECT * FROM attendance 
+			WHERE class_id = :class_id and date = :date'
+		);
 		$statement->execute(array(
-			':Id_clase' => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING),
-			':Fecha' => $_POST["date"]
+			':class_id' => filter_var(strtolower($_GET['class_id']), FILTER_SANITIZE_STRING),
+			':date' => $_POST["date"]
 		));
+		// TODO: fix the bug, when some teacher register attendance, it is not saved
 		$is_date_repeated = $statement->fetch();
 		if (!$is_date_repeated) {
 
@@ -34,18 +42,21 @@ if (isset($_SESSION['usuario'])) {
 			$date = $_POST["date"];
 			unset($_POST["date"]);
 			// se guarda la fecha y se quita del arreglo de POST
-			foreach ($_POST as $id => $assistance) {
+			foreach ($_POST as $id => $attendance) {
 				// Recorre todos los registros para dar alta a los estudiantes
-				$connection = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
-				$statement = $connection->prepare('INSERT INTO asistencias(Id, Id_clase, Id_alumno, Fecha, Id_tipo_asistencia) VALUES(NULL , :Id_clase, :Id_alumno, :Fecha, :Id_tipo_asistencia)');
+				$connection = new PDO('mysql:host=localhost;dbname=attendance_school', 'root', '');
+				$statement = $connection->prepare(
+					'INSERT INTO attendance(id, class_id, student_id, date, type_attendance_id) 
+					VALUES(NULL , :class_id, :student_id, :date, :type_attendance_id)'
+				);
 				$statement->execute(array(
-					"Id_clase" => filter_var(strtolower($_GET['id_clase']), FILTER_SANITIZE_STRING),
-					':Id_alumno' => $id,
-					':Fecha' => $date,
-					":Id_tipo_asistencia" => $assistance
+					"class_id" => filter_var(strtolower($_GET['class_id']), FILTER_SANITIZE_STRING),
+					':student_id' => $id,
+					':date' => $date,
+					":type_attendance_id" => $attendance
 				));
 			}
-			echo "<script>alert('Datos guardados exitosamente')</script>";
+			echo "<script>alert('Data saved successfuly')</script>";
 		} else $is_new_data = false;
 	}
 	if (!$user) {

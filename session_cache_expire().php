@@ -7,8 +7,7 @@ if (isset($_SESSION["timeout"])) {
     $sessionTTL = time() - $_SESSION["timeout"];
     $time_left = $inactivity_time - $sessionTTL;
     if ($time_left < 300) {
-        echo "<script>alert('Estimado usuario, le quedan " . $time_left .
-            " segundos para caducar su sesión, tome sus medidas')</script>";
+        echo "<script>alert('Dear user, $time_left minutes left to close the session.')</script>";
     }
     if ($sessionTTL > $inactivity_time) {
         header("Location: logout.php");

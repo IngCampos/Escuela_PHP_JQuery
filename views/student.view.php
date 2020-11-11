@@ -1,60 +1,73 @@
 <center>
-	<h2>Grupos en curso</h2>
+	<h2>Subjects</h2>
 </center>
 <?php
 try {
-	$connection = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
+	$connection = new PDO('mysql:host=localhost;dbname=attendance_school', 'root', '');
 } catch (PDOException $e) {
-	echo "Error:" . $e->getMessage();
+	echo "Error: {$e->getMessage()}";
 }
 $statement = $connection->prepare(
-	'SELECT clases.Id, clases.Hora, materias.Nombre, materias.Descripcion, materias.Grado, usuarios.Nombres, usuarios.Apellidos 
-	FROM alumnos_clases INNER JOIN clases ON alumnos_clases.Id_clase=clases.Id 
-	INNER JOIN materias ON clases.Id_materia=materias.Id 
-	INNER JOIN usuarios ON clases.Id_maestro=usuarios.Id
-WHERE alumnos_clases.Id_alumno = :Id ORDER BY clases.Hora'
+	'SELECT class.id, class.hour, subjects.name, subjects.description, subjects.grade, users.name 
+	FROM student_class INNER JOIN class ON student_class.class_id=class.id 
+	INNER JOIN subjects ON class.subject_id=subjects.id 
+	INNER JOIN users ON class.teacher_id=users.id
+	WHERE student_class.student_id = :id ORDER BY class.hour'
 );
 $statement->execute(array(
-	':Id' => $_SESSION['usuario']['0']
-	//se pone 0 por que al haber dos campos con el nombre Id, el otro pasa a nombrarse 0
+	':id' => $_SESSION['user']['0']
+	//se pone 0 por que al haber dos campos con el name id, el otro pasa a nombrarse 0
 ));
-$subjects = $statement->fetch();
-echo "<table><tr><td>Hora</td><td>Materia</td><td>Grado</td><td>Maestro(a)</td><td>Asistencias</td></tr>";
+$class = $statement->fetch();
+echo "<table><tr><td>Hour</td><td>Subject</td><td>Grade</td><td>Teacher</td><td>Attendances</td></tr>";
 
-while ($subjects != null) {
-	//en el proceso determina el numero de asistencias, faltas, etc.
-	$statement2 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=1 and Id_clase = :Id_clase');
+while ($class != null) {
+	//en el proceso determina el numero de attendance, faltas, etc.
+	// TODO: create just one SQL query instead of 4 queries
+	$statement2 = $connection->prepare(
+		'SELECT COUNT(*) AS amount FROM attendance 
+		WHERE student_id=:id and type_attendance_id=1 and class_id = :class_id'
+	);
 	$statement2->execute(array(
-		':Id' => $_SESSION['usuario']['0'],
-		':Id_clase' => $subjects['Id']
+		':id' => $_SESSION['user']['0'],
+		':class_id' => $class['id']
 	));
-	$assistance = $statement2->fetch();
+	$attendance = $statement2->fetch();
 
-	$statement3 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=2 and Id_clase = :Id_clase');
+	$statement3 = $connection->prepare(
+		'SELECT COUNT(*) AS amount FROM attendance 
+		WHERE student_id=:id and type_attendance_id=2 and class_id = :class_id'
+	);
 	$statement3->execute(array(
-		':Id' => $_SESSION['usuario']['0'],
-		':Id_clase' => $subjects['Id']
+		':id' => $_SESSION['user']['0'],
+		':class_id' => $class['id']
 	));
 	$absences = $statement3->fetch();
 
-	$statement4 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=3 and Id_clase = :Id_clase');
+	$statement4 = $connection->prepare(
+		'SELECT COUNT(*) AS amount FROM attendance 
+		WHERE student_id=:id and type_attendance_id=3 and class_id = :class_id'
+	);
 	$statement4->execute(array(
-		':Id' => $_SESSION['usuario']['0'],
-		':Id_clase' => $subjects['Id']
+		':id' => $_SESSION['user']['0'],
+		':class_id' => $class['id']
 	));
 	$exculpatory = $statement4->fetch();
 
-	$statement5 = $connection->prepare('SELECT COUNT(*) AS cantidad FROM asistencias WHERE Id_alumno=:Id and Id_tipo_asistencia=4 and Id_clase = :Id_clase');
+	$statement5 = $connection->prepare(
+		'SELECT COUNT(*) AS amount FROM attendance 
+		WHERE student_id=:id and type_attendance_id=4 and class_id = :class_id'
+	);
 	$statement5->execute(array(
-		':Id' => $_SESSION['usuario']['0'],
-		':Id_clase' => $subjects['Id']
+		':id' => $_SESSION['user']['0'],
+		':class_id' => $class['id']
 	));
 	$delays = $statement5->fetch();
 
-	$total_days = $assistance['cantidad'] + $absences['cantidad'] + $delays['cantidad'] + $exculpatory['cantidad'];
-	echo "<tr><td>" . $subjects["Hora"] . "</td><td>" . $subjects["Nombre"] . "</td><td>" . $subjects["Grado"] . "</td><td>" . $subjects["Nombres"] .
-		"<br>" . $subjects["Apellidos"] . "</td><td>Asistencias: " . $assistance['cantidad'] . "<br>Faltas: " . $absences['cantidad'] . "<br>Justificantes:" .
-		$exculpatory['cantidad'] . "<br>Retardos: " . $delays['cantidad'] . "<br> Total de clases: " . $total_days . "<hr></td></tr>";
-	$subjects = $statement->fetch();
+	$total_days = $attendance['amount'] + $absences['amount'] + $delays['amount'] + $exculpatory['amount'];
+	echo "<tr><td>{$class['hour']}</td><td>{$class[2]}</td><td>{$class['grade']}</td><td>{$class['name']}</td>
+	<td>Assistances: {$attendance['amount']}<br>Absences: {$absences['amount']}<br>Exculpatories: 
+		{$exculpatory['amount']}<br>Delays: {$delays['amount']}<br> Total: {$total_days}<hr></td></tr>";
+	$class = $statement->fetch();
 }
-echo "</table> Dias pasados:" . $total_days;
+echo "</table> Total days: $total_days";

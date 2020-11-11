@@ -1,3 +1,3 @@
-# Control de asistencias PHP
+# Control de attendance PHP
 
 Proyecto escolar con PHP vanilla mejorado

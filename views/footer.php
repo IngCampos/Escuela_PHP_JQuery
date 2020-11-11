@@ -1,5 +1,7 @@
     </div>
     </body>
     <footer>
-        <center>Sistema de asistencias PHP</center>
+        <center>
+            Roll Call System PHP
+        </center>
     </footer>

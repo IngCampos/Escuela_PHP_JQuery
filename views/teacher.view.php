@@ -1,21 +1,28 @@
 <center>
-	<h2>Grupos asignados</h2>
+	<h2>Subjects</h2>
 </center>
 <?php
 try {
-	$connection = new PDO('mysql:host=localhost;dbname=escuela_bd', 'root', '');
+	$connection = new PDO('mysql:host=localhost;dbname=attendance_school', 'root', '');
 } catch (PDOException $e) {
-	echo "Error:" . $e->getMessage();
+	echo "Error: {$e->getMessage()}";
 }
-$statement = $connection->prepare('SELECT clases.Id, materias.Nombre, materias.Grado, materias.Descripcion, clases.Hora FROM clases INNER JOIN materias ON clases.Id_materia=materias.Id WHERE clases.Id_maestro = :Id ORDER BY clases.Hora');
+$statement = $connection->prepare(
+	'SELECT class.id, subjects.name, subjects.grade, subjects.description, class.hour 
+	FROM class INNER JOIN subjects ON class.subject_id=subjects.id 
+	WHERE class.teacher_id = :id 
+	ORDER BY class.hour'
+);
 $statement->execute(array(
-	':Id' => $_SESSION['usuario']['0']
-	//se pone 0 por que al haber dos campos con el nombre Id, el otro pasa a nombrarse 0
+	':id' => $_SESSION['user']['0']
+	//se pone 0 por que al haber dos campos con el name id, el otro pasa a nombrarse 0
 ));
-$subjects = $statement->fetch();
-echo "<table ><tr><td>Hora</td><td>Materia</td><td>Grado</td><td>Pase de lista</td><td>Asistencias</td><td></tr>";
-while ($subjects != null) {
-	echo "<tr><td>" . $subjects["Hora"] . "</td><td>" . utf8_encode($subjects["Nombre"]) . "</td><td><center>" . $subjects["Grado"] . "</center></td><td><center><a class='fa fa-edit' href='control.php?id_clase=" . $subjects["Id"] . "'></a></center></td><td><center><a class='fa fa-sticky-note' href='assistance.php?id_clase=" . $subjects["Id"] . "'></a></center></td></tr>";
-	$subjects = $statement->fetch();
+$class = $statement->fetch();
+echo "<table><tr><td>Hour</td><td>Subject</td><td>Grade</td><td>Pass the role</td><td>Attendances</td><td></tr>";
+while ($class != null) {
+	echo "<tr><td>{$class['hour']}</td><td>{$class['name']}</td><td><center>{$class['grade']}</center></td>
+	<td><center><a class='fa fa-edit' href='control.php?class_id={$class['id']}'></a></center></td>
+	<td><center><a class='fa fa-sticky-note' href='attendance.php?class_id={$class['id']}'></a></center></td></tr>";
+	$class = $statement->fetch();
 }
 echo "</table>";

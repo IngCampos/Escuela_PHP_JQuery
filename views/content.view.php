@@ -3,14 +3,14 @@ require 'header.php';
 ?>
 
 <body>
-	<div class="contenedor">
-		<h2>Inicio: <?php echo $_SESSION['usuario']['Nombres'] . " " . $_SESSION['usuario']['Apellidos'] . "(" . $_SESSION['usuario']['Titulo'] . ")"; ?></h2>
-		<a href="logout.php">Cerrar Sesi&oacute;n</a><a style="float: right;" class="inico" href="index.php">Inicio</a>
+	<div class="container">
+		<h2>Index: <?php echo "{$_SESSION['user']['name']} ({$_SESSION['user']['title']})"; ?></h2>
+		<a href="logout.php">Logout</a><a style="float: right;" class="inico" href="index.php">Index</a>
 		<hr class="border">
-		<div class="contenido">
-			<?php if ($_SESSION['usuario']['Titulo'] == "Alumno") require 'student.view.php';
-			if ($_SESSION['usuario']['Titulo'] == "Maestro") require 'teacher.view.php';
-			if ($_SESSION['usuario']['Titulo'] == "Administrador") require 'administrator.view.php'; ?>
+		<div class="content">
+			<?php if ($_SESSION['user']['title'] == "Student") require 'student.view.php';
+			else if ($_SESSION['user']['title'] == "Teacher") require 'teacher.view.php';
+			else if ($_SESSION['user']['title'] == "Administrator") require 'administrator.view.php'; ?>
 			<hr>
 		</div>
 	</div>

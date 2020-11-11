@@ -22,13 +22,13 @@ a:hover {
   text-decoration: underline;
 }
 
-.contenedor {
+.container {
   max-width: 500px;
   width: 90%;
   margin: auto;
 }
 
-.titulo {
+.title {
   font-weight: 300;
   color: #b8711b;
   text-align: center;
@@ -43,28 +43,27 @@ a:hover {
   color: none;
 }
 
-.formulario {
+.form {
   background: #2c2c47;
   padding: 30px;
   margin-bottom: 30px;
 }
 
-.formulario .form-group {
+.form .form-group {
   width: 100%;
   margin-bottom: 10px;
 }
 
-.formulario input[type="number"],
-.formulario input[type="password"] {
+.form input[type="number"],
+.form input[type="password"] {
   padding: 15px;
-  font-family: "Raleway", sans-serif;
   font-size: 18px;
   line-height: 18px;
   border: none;
   vertical-align: top;
 }
 
-.formulario .icono {
+.form .icon {
   padding: 15px;
   text-align: center;
   width: 48px;
@@ -77,7 +76,7 @@ a:hover {
   vertical-align: top;
 }
 
-.formulario .icono.izquierda {
+.form .icon.left {
   margin-right: 4px;
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
@@ -86,8 +85,8 @@ a:hover {
   border-radius: 3px 0 0 3px;
 }
 
-.formulario .usuario,
-.formulario .password {
+.form .user,
+.form .password {
   width: calc(100% - 52px);
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -96,33 +95,24 @@ a:hover {
   border-radius: 0 3px 3px 0;
 }
 
-.formulario .password_btn {
+.form .password_btn {
   width: calc(100% - 105px);
 }
 
-.formulario .error ul {
+.form .error ul {
   padding: 0 15px;
 }
 
-.formulario .error ul li {
+.form .error ul li {
   margin-bottom: 10px;
 }
 
-.texto-registrate {
-  text-align: center;
-}
-
-.texto-registrate a {
-  display: block;
-  font-size: 18px;
-}
-
-.contenido article {
+.content article {
   padding: 30px;
   background: #fff;
 }
 
-.contenido article p {
+.content article p {
   margin-bottom: 10px;
   color: #000;
 }
@@ -137,7 +127,6 @@ a:hover {
   background: #679863;
   display: inline-block;
   color: #fff;
-  background: #769766;
   cursor: pointer;
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;

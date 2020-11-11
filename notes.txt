@@ -5,22 +5,22 @@ en todas las paginas se replico el codigo ya que se trata de un mismo dise�o, 
 
 Se creo la navegacion, se modificaron los links, los enlaces
 
-ahora se empieza con el codigo php,
+ahour se empieza con el codigo php,
 empezando por registrate
 se validan las variables
-se valida que no exista el usuario
+se valida que no exista el user
 se hasea la contrase�a por seguridad
 en un proyecto grande es necesario saber mas de seguridad
 se valida que la contrase�as sean iguales
-se registra el usuario mediante la consulta
+se registra el user mediante la consulta
 
-todas las consultas se hicieron como preparadas por seguridad, para que el usuario no pueda inyectar codigo
+todas las consultas se hicieron como preparadas por seguridad, para que el user no pueda inyectar codigo
 
 ya iniciando sesion debe de haber una forma para cerrarla
-la parte de contenido que se muestra al inciar sesion debe estar comprobada para que solo se abra si se ha iniciado sesion
+la parte de content que se muestra al inciar sesion debe estar comprobada para que solo se abra si se ha iniciado sesion
 
 en la parte de login tambien se hizo la validacion y el hash de la contrase�a
-no se recomienda decirle al usuario en los errores de nombre y contrase�a, cual esta mal
+no se recomienda decirle al user en los errores de name y contrase�a, cual esta mal
 
 todas las paginas con las que iniciamos sesion, debemos tener el session star
 
