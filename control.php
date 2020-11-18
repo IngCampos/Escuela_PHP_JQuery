@@ -62,10 +62,10 @@ if (isset($_SESSION['user'])) {
 	if (!$user) {
 		// verifica que la clase a la que quiere entrar el maestro le pertenezca
 		// de lo contrario lo regresa al menu principal
-		header('Location: login.php');
+		header('Location: login');
 	}
 	require 'views/control.view.php';
 } else {
-	header('Location: ../login.php');
+	header('Location: login');
 	die();
 }

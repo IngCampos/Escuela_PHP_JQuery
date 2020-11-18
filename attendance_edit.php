@@ -21,7 +21,7 @@ if (isset($_SESSION['user'])) {
 	if (!$user) {
 		// verifica que la clase a la que quiere entrar el maestro le pertenezca
 		// de lo contrario lo regresa al menu principal
-		header('Location: login.php');
+		header('Location: login');
 	} else {
 		$statement2 = $connection->prepare(
 			'SELECT * FROM student_class INNER JOIN users ON student_class.student_id=users.id 
@@ -33,7 +33,7 @@ if (isset($_SESSION['user'])) {
 		));
 		$students = $statement2->fetch();
 		if (!$students) {
-			header('Location: login.php');
+			header('Location: login');
 		} else
 			if ($_POST != null) {
 			foreach ($_POST as $date => $attendance) {
@@ -54,6 +54,6 @@ if (isset($_SESSION['user'])) {
 		require 'views/attendance_edit.view.php';
 	}
 } else {
-	header('Location: ../login.php');
+	header('Location: login');
 	die();
 }

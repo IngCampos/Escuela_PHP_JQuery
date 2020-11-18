@@ -5,7 +5,7 @@ require 'session_cache_expire().php';
 // Comprobamos si ya tiene una sesion
 # Si ya tiene una sesion redirigimos al content, para que no pueda acceder al form
 if (isset($_SESSION['user'])) {
-	header('Location: index.php');
+	header('Location: index');
 	die();
 } //lo ideal en un proyecto grande es poner esta funcion en otro archivo y llamarlo, ya que se esta replicando el mismo codigo en todas las vistas
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$_SESSION["timeout"] = time();
 			$_SESSION['user'] = $result;
 			// Guarda la informacion del user para mas adelante no volver a consultar
-			header('Location: index.php');
+			header('Location: index');
 		} else {
 			// al acceder con las credenciales, se registra como incorrecto
 			$unsuccessful_login = $connection->prepare(

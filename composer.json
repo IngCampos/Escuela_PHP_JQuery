@@ -1,0 +1,15 @@
+{
+    "name": "martin-stepwolf/php-attendance-school",
+    "description": "School system for attendances.",
+    "type": "project",
+    "require": {
+        "zendframework/zend-diactoros": "^2.2",
+        "aura/router": "^3.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "martin-stepwolf"
+        }
+    ]
+}

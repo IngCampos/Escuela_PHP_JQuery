@@ -15,5 +15,5 @@ $login_ended->execute(array(
 session_destroy();
 $_SESSION = array(); // la sesion la dejamos vacia por seguridad
 
-header('Location: login.php');
+header('Location: login');
 die();

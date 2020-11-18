@@ -6,6 +6,6 @@ require 'session_cache_expire().php';
 if (isset($_SESSION['user'])) {
 	require 'views/content.view.php';
 } else {
-	header('Location: login.php');
+	header('Location: login');
 	die();
 }
