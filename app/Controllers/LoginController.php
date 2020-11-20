@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
+
 class LoginController extends BaseController
 {
     public function index()
@@ -17,14 +19,15 @@ class LoginController extends BaseController
     {
         if ($request->getMethod() == 'POST') {
             $postData = $request->getParsedBody();
-            // $postData['id'];
-            // $postData['password'];
-            $loginSuccessful = true;
-            if ($loginSuccessful) {
+            $user = new User();
+            $passwordHashed = hash('sha512', "attendance_school{$postData['password']}");
+
+            if ($user->getPassword($postData['id']) == $passwordHashed) {
                 header("Location: /rolecall");
                 die();
             }
         }
+
         return $this->renderHTML('login.twig', [
             'errors' => ['Password or id are wrong.']
         ]);
