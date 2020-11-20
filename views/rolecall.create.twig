@@ -9,10 +9,13 @@
 <h3>Grade: {{ class.grade }}</h3>
 <h3>Description: {{ class.description }}</h3>
 <h3>
-	<center><a class='fa fa-sticky-note' href='/rolecall/show?class_id={{ class.id }}'>Look attendance</a></center>
+	<center>
+		<a class='fa fa-sticky-note' href='/rolecall'>Look classes</a>
+		<a class='fa fa-sticky-note' href='/rolecall/show/{{ class.id }}'>Look attendance</a>
+	</center>
 </h3>
 <hr>
-<form method="post" action="rolecall/store?class_id={{ class.id }}">
+<form method="post" action="/rolecall/store/{{ class.id }}">
 	<div class="form-group">
 		date: <input class="form-control" id="date" type="date" name="date" value="{{ current_date}}" required>
 		<button type="submit" value="Save" class="btn btn-success">Save <i class="fa fa-save"></i></button>

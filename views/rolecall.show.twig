@@ -11,7 +11,7 @@
 <h3>
 	<center>
 		<a class='fa fa-sticky-note' href='/rolecall'>Look classes</a>
-		<a class='fa fa-edit' href='/rolecall/create?class_id={{class.id}}'>Pass the role</a>
+		<a class='fa fa-edit' href='/rolecall/create/{{class.id}}'>Pass the role</a>
 	</center>
 </h3>
 <hr>
@@ -31,7 +31,7 @@
 		<td><center>{{student.attendances.exculpatory}}</center></td>
 		<td><center>{{student.attendances.delay}}</center></td>
 		<td><center>
-			<a class='fa fa-edit' href='/rolecall/show/edit?class_id={{class.id}}&student_id={{student.id}}'></a>
+			<a class='fa fa-edit' href='/rolecall/show/{{ class.id }}/edit/{{ student.id }}'></a>
 		</center></td>
 	</tr>
 {% endfor %}

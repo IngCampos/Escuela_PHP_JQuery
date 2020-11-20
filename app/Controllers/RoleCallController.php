@@ -98,6 +98,21 @@ class RoleCallController extends BaseController
         ]);
     }
 
+    public function store($request)
+    {
+        if ($request->getMethod() == 'POST') {
+            $postData = $request->getParsedBody();
+            $storeSuccessful = true;
+            if ($storeSuccessful) {
+                header("Location: /rolecall/show/1");
+                die();
+            }
+        }
+        return $this->renderHTML('rolecall.create.twig', [
+            'errors' => ['Data not stored.']
+        ]);
+    }
+
     public function showEdit()
     {
         $class = [
@@ -135,6 +150,21 @@ class RoleCallController extends BaseController
             'login' => [
                 "name" => "Martin"
             ]
+        ]);
+    }
+
+    public function showUpdate($request)
+    {
+        if ($request->getMethod() == 'POST') {
+            $postData = $request->getParsedBody();
+            $updateSuccessful = true;
+            if ($updateSuccessful) {
+                header("Location: /rolecall/show/1");
+                die();
+            }
+        }
+        return $this->renderHTML('rolecall.show.edit.twig', [
+            'errors' => ['Data not updated.']
         ]);
     }
 }

@@ -5,16 +5,17 @@
 {% endblock %}
 
 {% block body %}
-
+{{ class_id }}
 <h3>Subject: {{class.name}}</h3>
 <h3>Hour: {{class.hour}}</h3>
 <h3>Grade: {{class.grade}}</h3>
-<h3>Student: {{class.student.name}}</h3>"
+<h3>Student: {{class.student.name}}</h3>
 <h3>
-	<center><a class='fa fa-sticky-note' href='/rolecall/show?class_id={{ class.id }}'>Look attendance</a></center>
+	<center><a class='fa fa-sticky-note' href='/rolecall/show/{{ class.id }}'>Look attendance</a></center>
 </h3>
 <hr>
-<form method="post" action="/rolecall/show/store?class_id={{ class.id }}&student_id={{ class.student.id }}">
+<form method="post" action="/rolecall/show/{{ class.id }}/update/{{ class.student.id }}">
+
 	<table>
 		<tr>
 			<td>Date</td>

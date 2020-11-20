@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<form class="form" name="login" action="login" method="POST">
+<form class="form" action="/login" method="POST">
 	<div class="form-group">
 		<i class="icon left fa fa-user"></i><input class="user" type="number" name="id" placeholder="Id" required {% if not allow_to_login %} disabled {% endif%}>
 	</div>
@@ -13,9 +13,7 @@
 		<button type="submit" class="submit-btn fa fa-arrow-right" {% if not allow_to_login %} disabled {% endif%}></button>
 	</div>
 </form>
-{% for error in errors %}
-	<li>{{ error }}</li>
-{% endfor %}
+
 
 <center>
 	"school" is the password by default.<br>

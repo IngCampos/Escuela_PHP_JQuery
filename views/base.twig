@@ -28,6 +28,14 @@
 		</h2>
 		<div class="content">
 			{% block body %}{% endblock %}
+			{% if errors is defined %}
+			<div>
+				<p>Errors:</p>
+				{% for error in errors %}
+				<li>{{ error }}</li>
+				{% endfor %}
+			</div>
+			{% endif %}
 		</div>
 	</div>
 	<footer>
