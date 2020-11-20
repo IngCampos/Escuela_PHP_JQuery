@@ -1,0 +1,35 @@
+{% extends 'base.twig' %}
+
+{% block section %}
+	Attendances
+{% endblock %}
+
+{% block body %}
+
+<table>
+	<tr>
+		<td>Hour</td>
+		<td>Subject</td>
+		<td>Grade</td>
+		<td>Teacher</td>
+		<td>Attendances</td>
+	</tr>
+	{% for class in classes %}
+	<tr>
+		<td>{{ class.hour }}</td>
+		<td>{{ class.subject }}</td>
+		<td>{{ class.grade }}</td>
+		<td>{{ class.teacher }}</td>
+		<td>
+			Assistances: {{ class.attendances.assistance }}<br>
+			Absences: {{ class.attendances.abscence }}<br>
+			Exculpatories: {{ class.attendances.exculpatory }}<br>
+			Delays: {{ class.attendances.delay }}<br> 
+			Total: 4 <hr>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<center> Days: 4</center>
+
+{% endblock %}

@@ -21,12 +21,45 @@ $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
 
 // add a route to the map, and a handler for it
-$map->get('index', '/', '../index.php');
-$map->get('login', '/login', '../login.php');
-$map->get('control', '/control', '../control.php');
-$map->get('attendance', '/attendance', '../attendance.php');
-$map->get('attendance.edit', '/attendance/edit', '../attendance_edit.php');
-$map->get('logout', '/logout', '../logout.php');
+$map->get('login', '/', [
+    'controller' => 'App\Controllers\LoginController',
+    'action' => 'index'
+]);
+
+$map->get('logout', '/logout', [
+    'controller' => 'App\Controllers\LoginController',
+    'action' => 'logout'
+]);
+
+$map->get('admin.users', '/users', [
+    'controller' => 'App\Controllers\UserController',
+    'action' => 'index'
+]);
+
+$map->get('rolecall', '/rolecall', [
+    'controller' => 'App\Controllers\RoleCallController',
+    'action' => 'index'
+]);
+
+$map->get('rolecall.show', '/rolecall/show', [
+    'controller' => 'App\Controllers\RoleCallController',
+    'action' => 'show'
+]);
+
+$map->get('rolecall.create', '/rolecall/create', [
+    'controller' => 'App\Controllers\RoleCallController',
+    'action' => 'create'
+]);
+
+$map->get('rolecall.show.edit', '/rolecall/show/edit', [
+    'controller' => 'App\Controllers\RoleCallController',
+    'action' => 'showEdit'
+]);
+
+$map->get('student', '/student', [
+    'controller' => 'App\Controllers\StudentController',
+    'action' => 'index'
+]);
 
 // get the route matcher from the container
 $matcher = $routerContainer->getMatcher();
@@ -37,5 +70,13 @@ $route = $matcher->match($request);
 if (!$route) {
     echo '404 error';
 } else {
-    require $route->handler;
+    // get the controller and its function
+    $handlerData = $route->handler;
+    $controllerName = $handlerData['controller'];
+    $actionName = $handlerData['action'];
+
+    $controller = new $controllerName;
+    $response = $controller->$actionName();
+
+    echo $response->getBody();
 }
