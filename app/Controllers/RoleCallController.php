@@ -48,6 +48,35 @@ class RoleCallController extends BaseController
     {
         if ($request->getMethod() == 'POST') {
             $postData = $request->getParsedBody();
+            $attendance = new Attendance();
+            $class_id = 1; // testing
+            // the date has '' because is a string
+            $date = "'{$postData['date']}'";
+            // the date is deleted to have just the attendance of each student
+            unset($postData['date']);
+
+            // if there are data whit the same class_id and date
+            // the data is not stored
+            $conditionals = [
+                "class_id = $class_id",
+                "date = $date"
+            ];
+            if (!empty($attendance->getWhere($conditionals)))
+            return $this->renderHTML('rolecall.create.twig', [
+                'errors' => ['There is the same date in the database.']
+            ]);
+
+            foreach ($postData as $key => $data) {
+                // TODO: Optimize the code, here an array whit the same values are created
+                $data = [
+                    "class_id" => $class_id,
+                    "student_id" => $key,
+                    "date" => $date,
+                    "type_attendance_id" => $data,
+                ];
+                $attendance->save($data);
+            }
+
             $storeSuccessful = true;
             if ($storeSuccessful) {
                 header("Location: /rolecall/show/1");
@@ -75,6 +104,21 @@ class RoleCallController extends BaseController
     {
         if ($request->getMethod() == 'POST') {
             $postData = $request->getParsedBody();
+            $attendance = new Attendance();
+            $class_id = 1; // testing
+            $student_id = 101; //testing
+
+            foreach ($postData as $key => $data) {
+                $updates = ["type_attendance_id = $data"];
+                $conditionals = [
+                    "class_id = $class_id",
+                    "student_id = $student_id",
+                    // date has '' because it is a String
+                    "date = '$key'"
+                ];
+                $attendance->update($updates, $conditionals);
+            }
+            
             $updateSuccessful = true;
             if ($updateSuccessful) {
                 header("Location: /rolecall/show/1");

@@ -13,10 +13,11 @@ Note: The project does the same (modules, views, database).
 As IT student, I knew already about databases and PHP vanilla.
 Now I know **composer** and I have worked whit Laravel and Symfony I improved the project whit:
 
-- Configure composer and the Front controller.
+- Configure **composer** and the **Front controller**.
 - Install and configure third party packages.
 - Implement **Model-View-Controller pattern**.
-- Implement Twig in order to have better views.
+- **Create a basic ORM(instead of use Eloquent and use the initial way to access to the database), using OOP and SQL queries**.
+- Implement Twig in order to have **better views**.
 - Set the routes whit its url, controller and method.
 - Clean and optimize the code.
 
@@ -66,3 +67,8 @@ You're free to contribute to this project by submitting [issues](https://github.
 ## License
 
 This personal project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+
+## References :books:
+
+- [PHP introduction course 2018 - Course for remastering](https://platzi.com/clases/php/)
+- [PHP 7 and MySQL: Course from scratch](https://www.udemy.com/course/php-y-mysql/)

@@ -35,19 +35,47 @@ class Base
 
     public function save($data)
     {
-        $query = "INSERT INTO $this->table ($data->keys) VALUES ($data->values)";
-        return $this->get($query);
+        /**
+         * For a SQL query to insert data columns and values are string separated
+         * the next two lines below adapt the array in a proper format
+         * implode() convert an array in string
+         */
+        $columns = implode(", ", array_keys($data));
+        $values = implode(", ", array_values($data));
+
+        $query = "INSERT INTO $this->table ($columns) VALUES ($values)";
+        try {
+            $this->get($query);
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
-    public function update($data, $id)
+    public function update($updates, $conditionals)
     {
-        $query = "UPDATE $this->table SET $data WHERE $this->columnId = $id";
+        /**
+         * For a SQL query to update the values and conditionals looks like 'column = value'
+         * the next two lines below adapt the arrays in a proper format
+         * implode() convert an array in string
+         */
+        $updatesText = implode(", ", $updates);
+        $conditionalsText = implode(" and ", $conditionals);
+
+        $query = "UPDATE $this->table SET $updatesText WHERE $conditionalsText";
         return $this->get($query);
     }
 
     public function getAll()
     {
         $query = "SELECT * FROM $this->table";
+        return $this->get($query);
+    }
+
+    public function getWhere($conditionals)
+    {
+        $conditionalsText = implode(" and ", $conditionals);
+        $query = "SELECT * FROM $this->table WHERE $conditionalsText";
         return $this->get($query);
     }
 

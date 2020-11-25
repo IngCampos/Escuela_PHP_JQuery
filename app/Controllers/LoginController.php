@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Models\Logout;
 
 class LoginController extends BaseController
 {
@@ -35,6 +36,11 @@ class LoginController extends BaseController
 
     public function logout()
     {
+        $logout = new Logout();
+        $user_id = 101;
+        $data = ["user_id" => $user_id];
+
+        $logout->save($data);
         header("Location: /");
         die();
     }
