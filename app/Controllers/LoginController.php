@@ -21,8 +21,8 @@ class LoginController extends BaseController
             $postData = $request->getParsedBody();
             $user = new User();
             $passwordHashed = hash('sha512', "attendance_school{$postData['password']}");
-
-            if ($user->getPassword($postData['id']) == $passwordHashed) {
+            $userLogin = $user->findId($postData['id']);
+            if ($userLogin->password == $passwordHashed) {
                 header("Location: /rolecall");
                 die();
             }

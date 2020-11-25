@@ -21,15 +21,15 @@
 		<td>{{ class.grade }}</td>
 		<td>{{ class.teacher }}</td>
 		<td>
-			Assistances: {{ class.attendances.assistance }}<br>
-			Absences: {{ class.attendances.abscence }}<br>
-			Exculpatories: {{ class.attendances.exculpatory }}<br>
-			Delays: {{ class.attendances.delay }}<br> 
-			Total: 4 <hr>
+			Assistances: {{ class.attendances.assistance|default(0) }}<br>
+			Absences: {{ class.attendances.absence|default(0) }}<br>
+			Exculpatories: {{ class.attendances.exculpatory|default(0) }}<br>
+			Delays: {{ class.attendances.delay|default(0) }}<br>
+			Total days: {{ class.attendances.total }}
+			<hr>
 		</td>
 	</tr>
 	{% endfor %}
 </table>
-<center> Days: 4</center>
 
 {% endblock %}

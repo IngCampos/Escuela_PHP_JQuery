@@ -26,10 +26,18 @@
 	{% for student in class.students %}
 	<tr>
 		<td>{{student.name}}</td>
-		<td><center>{{student.attendances.assistance}}</center></td>
-		<td><center>{{student.attendances.abscence}}</center></td>
-		<td><center>{{student.attendances.exculpatory}}</center></td>
-		<td><center>{{student.attendances.delay}}</center></td>
+		<td>
+			<center>{{student.attendances.assistance|default(0)}}</center>
+		</td>
+		<td>
+			<center>{{student.attendances.absence|default(0)}}</center>
+		</td>
+		<td>
+			<center>{{student.attendances.exculpatory|default(0)}}</center>
+		</td>
+		<td>
+			<center>{{student.attendances.delay|default(0)}}</center>
+		</td>
 		<td><center>
 			<a class='fa fa-edit' href='/rolecall/show/{{ class.id }}/edit/{{ student.id }}'></a>
 		</center></td>

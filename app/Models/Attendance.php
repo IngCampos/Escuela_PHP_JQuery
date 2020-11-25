@@ -4,45 +4,31 @@ namespace App\Models;
 
 class Attendance extends Base
 {
-    private $table = 'attendance';
-
     function __construct()
     {
         parent::__construct();
+        $this->table = 'attendance';
     }
 
-    public function getAttendance($class_id, $student_id): array
+    public function getAttendance($class_id, $student_id)
     {
-        $attendance = [
-            "id" => 1,
-            "name" => "Mathematics",
-            "grade" => 5,
-            "hour" => '08:00',
-            "description" => 'description',
-            "student" => [
-                "id" => 1,
-                "name" => "Martin",
-                "attendances" => [
-                    [
-                        "date" => '2020-11-16',
-                        "type_attendance_id" => 1
-                    ],
-                    [
-                        "date" => '2020-11-17',
-                        "type_attendance_id" => 2
-                    ],
-                    [
-                        "date" => '2020-11-18',
-                        "type_attendance_id" => 2
-                    ],
-                    [
-                        "date" => '2020-11-19',
-                        "type_attendance_id" => 1
-                    ],
-                ]
-            ]
-        ];
+        $class =
+            "SELECT class.id, subjects.name, subjects.grade, class.hour, subjects.description
+        FROM class 
+        INNER JOIN subjects ON class.subject_id=subjects.id
+        WHERE class.id = $class_id";
+        $data = parent::get($class)[0];
 
-        return $attendance;
+        $student =
+            "SELECT id, name FROM users 
+        WHERE id = $student_id";
+        $data['student'] = parent::get($student)[0];
+
+        $attendances =
+            "SELECT date, type_attendance_id FROM $this->table 
+        WHERE student_id = $student_id and class_id = $class_id";
+        $data['student']['attendances'] = parent::get($attendances);
+
+        return $data;
     }
 }

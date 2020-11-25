@@ -4,11 +4,10 @@ namespace App\Models;
 
 class User extends Base
 {
-    private $table = 'users';
-
     function __construct()
     {
         parent::__construct();
+        $this->table = 'users';
     }
 
     public function __toString()
@@ -16,31 +15,34 @@ class User extends Base
         return  (string)  "$this->name ($this->type_user) - Grade: $this->grade";
     }
 
-    public function getPassword($user_id): string
+    public function GetClassesStudent($student_id)
     {
-        $password = "edf8654bfa65f2594efd5e4581646bae90df596e1514bd9477c4ad4c1c21de45e457a0b042bcfc9ebf07d8e4c84bd7eaa2cde8236d505928f6d32b66a45c8634";
-        // password for testing
-        return $password;
-    }
+        $classes =
+            "SELECT class.id, class.hour, subjects.name, subjects.grade, users.name as teacher
+        FROM class 
+        INNER JOIN subjects ON class.subject_id = subjects.id 
+        INNER JOIN student_class ON student_class.class_id = class.id
+        INNER JOIN users ON class.teacher_id = users.id
+        WHERE student_class.student_id = $student_id";
+        $data = parent::get($classes);
 
-    public function getUsers(): array
-    {
-        $users = [
-            [
-                "id" => 1,
-                "name" => "Martin",
-                "grade" => 5,
-                "attemps" => 0,
-                "password" => "12sdasPQs1",
-            ],
-            [
-                "id" => 2,
-                "name" => "Campos",
-                "grade" => 6,
-                "attemps" => 1,
-                "password" => "123uiudas)(!",
-            ],
-        ];
-        return $users;
+        foreach ($data as $key => $class) {
+            $attendances =
+                "SELECT type_attendance.description as name, COUNT(attendance.type_attendance_id) AS amount 
+            FROM attendance 
+            INNER JOIN type_attendance ON attendance.type_attendance_id = type_attendance.id  
+            WHERE student_id = $student_id and class_id = {$class['id']}
+            GROUP BY attendance.type_attendance_id";
+
+            $total = 0;
+            foreach (parent::get($attendances) as $attendance) {
+                // data about attendance is processed to have format $key(type_attendance) = $value(amount)
+                $data[$key]['attendances'][strtolower($attendance['name'])] = $attendance['amount'];
+                $total += $attendance['amount'];
+            }
+            $data[$key]['attendances']['total'] = $total;
+        }
+
+        return $data;
     }
 }

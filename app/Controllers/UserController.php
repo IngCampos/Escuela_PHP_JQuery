@@ -10,7 +10,7 @@ class UserController extends BaseController
     {
         $user = new User();
          return $this->renderHTML('user.twig', [
-            'users' => $user->getUsers(),
+            'users' => $user->getAll(),
             'login' => [
                 "name" => "Martin"
             ]

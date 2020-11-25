@@ -4,94 +4,53 @@ namespace App\Models;
 
 class Classe extends Base
 {
-    private $table = 'class';
-
     function __construct()
     {
         parent::__construct();
+        $this->table = 'class';
     }
 
-    public function getClassesStudent($student_id): array
+    public function getClassesTeacher($teacher_id)
     {
-        $classes = [
-            [
-                "hour" => "08:00",
-                "subject" => "Mathematics",
-                "grade" => "5",
-                "teacher" => "Martin",
-                "attendances" => [
-                    "assistance" => 2,
-                    "abscence" => 1,
-                    "exculpatory" => 1,
-                    "delay" => 0,
-                ]
-            ],
-            [
-                "hour" => "08:00",
-                "subject" => "Science",
-                "grade" => "5",
-                "teacher" => "Campos",
-                "attendances" => [
-                    "assistance" => 3,
-                    "abscence" => 0,
-                    "exculpatory" => 1,
-                    "delay" => 0,
-                ]
-            ],
-        ];
+        $query =
+            "SELECT class.id, subjects.name, subjects.grade, class.hour
+            FROM $this->table 
+        INNER JOIN subjects ON class.subject_id=subjects.id
+        WHERE teacher_id = $teacher_id";
+        $classes = parent::get($query);
+        
         return $classes;
     }
 
-    public function getClassesTeacher($teacher_id): array
+    public function getClassTeacher($class_id, $teacher_id)
     {
-        $classes = [
-            [
-                "id" => 1,
-                "name" => "Mathematics",
-                "grade" => 5,
-                "hour" => '08:00',
-            ],
-            [
-                "id" => 1,
-                "name" => "Science",
-                "grade" => 5,
-                "hour" => '09:00',
-            ]
-        ];
-        return $classes;
-    }
+        $class =
+            "SELECT class.id, subjects.name, subjects.grade, class.hour, subjects.description
+        FROM $this->table 
+        INNER JOIN subjects ON class.subject_id=subjects.id
+        WHERE teacher_id = $teacher_id and subject_id = $class_id";
+        $data = parent::get($class)[0];
 
-    public function getClassTeacher($teacher_id, $class_id): array
-    {
-        $class = [
-            "id" => 1,
-            "name" => "Mathematics",
-            "grade" => 5,
-            "hour" => '08:00',
-            "description" => 'description',
-            "students" => [
-                [
-                    "id" => 1,
-                    "name" => "Martin",
-                    "attendances" => [
-                        "assistance" => 2,
-                        "abscence" => 1,
-                        "exculpatory" => 1,
-                        "delay" => 0,
-                    ]
-                ],
-                [
-                    "id" => 2,
-                    "name" => "Campos",
-                    "attendances" => [
-                        "assistance" => 3,
-                        "abscence" => 0,
-                        "exculpatory" => 0,
-                        "delay" => 1,
-                    ]
-                ]
-            ]
-        ];
-        return $class;
+        $students =
+            "SELECT users.name, users.id FROM users 
+        INNER JOIN student_class ON student_class.student_id = users.id
+        WHERE student_class.class_id = $class_id";
+        $data['students'] = parent::get($students);
+
+        foreach ($data['students'] as $key => $student) {
+            $attendances =
+                "SELECT type_attendance.description as name, COUNT(attendance.type_attendance_id) AS amount 
+            FROM attendance 
+            INNER JOIN type_attendance ON attendance.type_attendance_id = type_attendance.id  
+            WHERE student_id = {$student['id']} and class_id = $class_id
+            GROUP BY attendance.type_attendance_id";
+
+            foreach (parent::get($attendances) as $attendance) {
+                // data about attendance is processed to have format $key(type_attendance) = $value(amount)
+                $data['students'][$key]['attendances'][strtolower($attendance['name'])] = $attendance['amount'];
+            }
+        }
+
+        return $data;
     }
 }
