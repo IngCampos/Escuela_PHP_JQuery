@@ -8,6 +8,7 @@ use PDOException;
 class Base
 {
     protected $db;
+    // TODO: get the data from another way like Laravel or Symfony
     private $host = "localhost";
     private $dbname = "attendance_school";
     private $user = "root";
@@ -81,6 +82,7 @@ class Base
 
     protected function get($query)
     {
+        // TODO: use the prepare statements to improve the security
         $statement = $this->db->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll();

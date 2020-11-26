@@ -18,6 +18,7 @@ class LoginController extends BaseController
 
     public function login($request)
     {
+        // TODO: Implement a logic to set a time in the section as the first version worked
         if ($request->getMethod() == 'POST') {
             $postData = $request->getParsedBody();
             $user = new User();
