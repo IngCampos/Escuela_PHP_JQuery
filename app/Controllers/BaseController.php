@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\RedirectResponse;
 
 class BaseController
 {
@@ -21,5 +22,23 @@ class BaseController
     public function renderHTML($fileName, $data = [])
     {
         return new Htmlresponse($this->templateEngine->render($fileName, $data));
+    }
+
+    public function redirectTypeUser($userType)
+    {
+        switch ($userType) {
+            case 1: // Administrator
+                return new RedirectResponse('/admin/users');
+                break;
+            case 2: // Teacher
+                return new RedirectResponse('/rolecall');
+                break;
+            case 3: // Student
+                return new RedirectResponse('/student');
+                break;
+            default: // unknown error
+                return new RedirectResponse('/logout');
+                break;
+        }
     }
 }

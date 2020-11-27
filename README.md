@@ -13,12 +13,12 @@ Note: The project does the same (modules, views, database).
 As IT student, I knew already about databases and PHP vanilla.
 Now I know **composer** and I have worked whit Laravel and Symfony I improved the project whit:
 
-- Configure **composer** and the **Front controller**.
-- Install and configure third party packages.
-- Implement **Model-View-Controller pattern**.
+- Configure **composer** to respect [PSR4](https://www.php-fig.org/psr/psr-4/) standard.
+- Install and configure third party packages and respect [PSR7](https://www.php-fig.org/psr/psr-7/) standard.
+- Implement **Model-View-Controller pattern** and **Front Controller**.
 - **Create a basic ORM(instead of use Eloquent and use the initial way to access to the database), using OOP and SQL queries**.
 - Implement Twig in order to have **better views**.
-- Set the routes whit its url, controller and method.
+- Improve the URL as /rolecall/{class_id} instead of /rolecall?class_id=*.
 - Clean and optimize the code.
 
 ## Getting Started :rocket:
@@ -71,4 +71,6 @@ This personal project is licensed under the [MIT License](https://choosealicense
 ## References :books:
 
 - [PHP introduction course 2018 - Course for remastering](https://platzi.com/clases/php/)
+- [PHP framework introduction course](https://platzi.com/clases/php-frameworks/)
+- [Oriented Object Programming in PHP - Course for creating better Models and Controllers](https://platzi.com/clases/php-poo/)
 - [PHP 7 and MySQL: Course from scratch](https://www.udemy.com/course/php-y-mysql/)

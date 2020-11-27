@@ -4,11 +4,15 @@ namespace App\Controllers;
 
 use App\Models\User;
 use App\Models\Logout;
+use Zend\Diactoros\Response\RedirectResponse;
 
 class LoginController extends BaseController
 {
     public function index()
     {
+        if (isset($_SESSION['userId']) && isset($_SESSION['userType']))
+        return parent::redirectTypeUser($_SESSION['userType']);
+        
         $allowToLogin = true;
 
         return $this->renderHTML('login.twig', [
@@ -25,8 +29,10 @@ class LoginController extends BaseController
             $passwordHashed = hash('sha512', "attendance_school{$postData['password']}");
             $userLogin = $user->findId($postData['id']);
             if ($userLogin->password == $passwordHashed) {
-                header("Location: /rolecall");
-                die();
+                $_SESSION['userId'] = $userLogin->id;
+                $_SESSION['userName'] = $userLogin->name;
+                $_SESSION['userType'] = $userLogin->type_user_id;
+                return parent::redirectTypeUser($_SESSION['userType']);
             }
         }
 
@@ -38,11 +44,13 @@ class LoginController extends BaseController
     public function logout()
     {
         $logout = new Logout();
-        $user_id = 101;
-        $data = ["user_id" => $user_id];
-
+        $data = ["user_id" => $_SESSION['userId']];
         $logout->save($data);
-        header("Location: /");
-        die();
+
+        session_destroy();
+        unset($_SESSION['userId']);
+        unset($_SESSION['userType']);
+        unset($_SESSION['userName']);
+        return new RedirectResponse('/');
     }
 }
