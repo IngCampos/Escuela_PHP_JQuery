@@ -9,6 +9,11 @@ require_once '../vendor/autoload.php';
 
 session_start();
 
+// Load the global variables from .env or .env.example (if .env does not exist)
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+$dotenv->load();
+$dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD']);
+            
 use Aura\Router\RouterContainer;
 
 // create a server request object

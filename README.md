@@ -30,9 +30,22 @@ These instructions will get you a copy of the project up and running on your loc
 The programs you need are:
 
 -   [Composer](https://getcomposer.org/download/).
--   Database and a web server whit PHP.
+-   Database ([MySQL](https://www.mysql.com/)) and a web server whit PHP 7.
 
 ### Installing 🔧
+
+First run the script database.sql in the database console to create the database and its data.
+
+Then duplicate the file .env.example as .env and set your credential for the database in.
+
+```
+DB_HOST=localhost
+DB_DATABASE=attendance_school
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Note: attendance_school is the name by default in database.sql.
 
 First install the PHP packages.
 

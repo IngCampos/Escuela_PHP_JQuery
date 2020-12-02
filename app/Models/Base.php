@@ -8,19 +8,17 @@ use PDOException;
 class Base
 {
     protected $db;
-    // TODO: get the data from another way like Laravel or Symfony
-    private $host = "localhost";
-    private $dbname = "attendance_school";
-    private $user = "root";
-    private $password = "";
-
     protected $table = "";
     protected $columnId = "id"; // by default
 
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:host=$this->host;dbname=$this->dbname", "$this->user", "$this->password");
+            $this->db = new PDO(
+                "mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_DATABASE']}",
+                "{$_ENV['DB_USERNAME']}",
+                "{$_ENV['DB_PASSWORD']}"
+            );
         } catch (PDOException $e) {
             $this->db = $e->getMessage();
         }
