@@ -12,7 +12,7 @@ session_start();
 // Load the global variables from .env or .env.example (if .env does not exist)
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
 $dotenv->load();
-$dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD']);
+$dotenv->required(['DB_DRIVER', 'DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD', 'DB_PORT']);
             
 use Aura\Router\RouterContainer;
 
