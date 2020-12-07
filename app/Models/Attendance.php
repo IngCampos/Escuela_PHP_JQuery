@@ -10,14 +10,14 @@ class Attendance extends Base
         $this->table = 'attendance';
     }
 
-    public function getAttendance($class_id, $student_id)
+    public function getAttendance($class_room_id, $student_id)
     {
-        $class =
-            "SELECT class.id, subjects.name, subjects.grade, class.hour, subjects.description
-        FROM class 
-        INNER JOIN subjects ON class.subject_id=subjects.id
-        WHERE class.id = $class_id";
-        $data = parent::get($class)[0];
+        $class_room =
+            "SELECT class_rooms.id, subjects.name, subjects.grade, class_rooms.hour, subjects.description
+        FROM class_rooms
+        INNER JOIN subjects ON class_rooms.subject_id=subjects.id
+        WHERE class_rooms.id = $class_room_id";
+        $data = parent::get($class_room)[0];
 
         $student =
             "SELECT id, name FROM users 
@@ -26,9 +26,9 @@ class Attendance extends Base
 
         $attendances =
             "SELECT date, type_attendance_id FROM $this->table 
-        WHERE student_id = $student_id and class_id = $class_id";
+        WHERE student_id = $student_id and class_room_id = $class_room_id";
         $data['student']['attendances'] = parent::get($attendances);
-
+        
         return $data;
     }
 }

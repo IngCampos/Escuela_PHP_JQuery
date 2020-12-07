@@ -8,7 +8,6 @@
 		<td>Id</td>
 		<td>Name</td>
 		<td>Grade</td>
-		<td>Attemps</td>
 		<td>Password</td>
 	</tr>
 	{% for user in users %}
@@ -16,7 +15,6 @@
 		<td>{{user.id}}</td>
 		<td>{{user.name}}</td>
 		<td>{{user.grade}}</td>
-		<td>{{user.attemps}}</td>
 		<td>{{user.password|slice(10, 10)}}</td>
 	</tr>
 	{% endfor %}

@@ -58,31 +58,31 @@ $map->get('rolecall', '/rolecall', [
     'auth' => true
 ]);
 
-$map->get('rolecall.show', '/rolecall/show/{class_id}', [
+$map->get('rolecall.show', '/rolecall/show/{class_room_id}', [
     'controller' => 'App\Controllers\RoleCallController',
     'action' => 'show',
     'auth' => true
 ]);
 
-$map->get('rolecall.create', '/rolecall/create/{class_id}', [
+$map->get('rolecall.create', '/rolecall/create/{class_room_id}', [
     'controller' => 'App\Controllers\RoleCallController',
     'action' => 'create',
     'auth' => true
 ]);
 
-$map->post('rolecall.store', '/rolecall/store/{class_id}', [
+$map->post('rolecall.store', '/rolecall/store/{class_room_id}', [
     'controller' => 'App\Controllers\RoleCallController',
     'action' => 'store',
     'auth' => true
 ]);
 
-$map->get('rolecall.show.edit', '/rolecall/show/{class_id}/edit/{student_id}', [
+$map->get('rolecall.show.edit', '/rolecall/show/{class_room_id}/edit/{student_id}', [
     'controller' => 'App\Controllers\RoleCallController',
     'action' => 'showEdit',
     'auth' => true
 ]);
 
-$map->post('rolecall.show.update', '/rolecall/show/{class_id}/update/{student_id}', [
+$map->post('rolecall.show.update', '/rolecall/show/{class_room_id}/update/{student_id}', [
     'controller' => 'App\Controllers\RoleCallController',
     'action' => 'showUpdate',
     'auth' => true
@@ -115,7 +115,7 @@ if (!$route) {
     }
 
     foreach ($route->attributes as $key => $value) {
-        // load the variables of the url (as class_id and student_id) in the request
+        // load the variables of the url (as class_room_id and student_id) in the request
         $request = $request->withAttribute($key, $value);
     }
 

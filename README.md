@@ -1,12 +1,11 @@
-# PHP School Roll Call
+# PHP School Rollcall
 
-_Website for attendance optimization (call the roll) in a school._
+_Website for attendance optimization in a generic school._
 
 ### Project goal by martin-stepwolf :goal_net:
 
 Project developed in a subject when I was student.
 As better developer **I rebuilt all the project** whit my better skills.
-Note: The project does the same (modules, views, database).
 
 ### Achievements :star2:
 
@@ -18,8 +17,8 @@ Now I know **composer** and I have worked whit Laravel and Symfony I improved th
 - Implement **Model-View-Controller pattern** and **Front Controller**.
 - **Create a basic ORM(instead of use Eloquent and use the initial way to access to the database), using OOP and SQL queries**.
 - Implement Twig in order to have **better views**.
-- Improve the URL as /rolecall/{class_id} instead of /rolecall?class_id=*.
-- Clean and optimize the code.
+- Improve the URL as /rolecall/{class_room_id} instead of /rolecall?class_room_id=*.
+- Implement **library for database management** instead of load a SQL script.
 
 ## Getting Started :rocket:
 
@@ -34,26 +33,30 @@ The programs you need are:
 
 ### Installing 🔧
 
-First run the script database.sql in the database console to create the database and its data.
-
-Then duplicate the file .env.example as .env and set your credential for the database in.
+First duplicate the file .env.example as .env and set your credential for the database in.
 
 ```
+DB_DRIVER=mysql
 DB_HOST=localhost
-DB_DATABASE=attendance_school
+DB_DATABASE=name
 DB_USERNAME=root
 DB_PASSWORD=
+DB_PORT=3306
 ```
 
-Note: attendance_school is the name by default in database.sql.
-
-First install the PHP packages.
+Then install the PHP packages.
 
 ```
 composer install
 ```
 
-Then import the file database.sql.
+Then generate the database and fill it with testing data:
+
+```
+vendor\bin\phinx migrate
+vendor\bin\phinx seed:run
+```
+
 
 Finally run the server:
 
@@ -66,8 +69,8 @@ php -S localhost:8080
 
 - In the login there are the ids and password by default to log in.
 - Administrator can watch all the users.
-- Students can watch its classes and its attendances.
-- Teachers can  watch its classes, pass the role and edit an attendance of a student.
+- Students can watch its class rooms and its attendances.
+- Teachers can  watch its class rooms, pass the role and edit an attendance.
 
 ## Authors
 

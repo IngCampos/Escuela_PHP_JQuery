@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-class LoginAttemp extends Base
+class Login extends Base
 {
     function __construct()
     {
         parent::__construct();
-        $this->table = 'login_attemps';
+        $this->table = 'logins';
     }
 }

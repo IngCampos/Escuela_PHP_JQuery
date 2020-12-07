@@ -5,7 +5,7 @@
 {% block body %}
 
 <h3>Name: {{ class.name }}</h3>
-<h3>Hour: {{ class.hour }}</h3>
+<h3>Hour: {{ class.hour }}:00</h3>
 <h3>Grade: {{ class.grade }}</h3>
 <h3>Description: {{ class.description }}</h3>
 <h3>
@@ -23,6 +23,7 @@
 	<div class="form-group">
 		<table>
 			<tr>
+				<td>Id</td>
 				<td>Name</td>
 				<td>Assistance</td>
 				<td>Absence</td>
@@ -31,6 +32,7 @@
 			</tr>
 			{% for student in class.students %}
 			<tr>
+				<td>{{ student.id }}</td>
 				<td>{{ student.name }}</td>
 				<td><center>
 					<input type='radio' name='{{ student.id}}' value=1 checked>

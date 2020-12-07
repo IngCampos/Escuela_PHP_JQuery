@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Classe;
+use App\Models\ClassRoom;
 use App\Models\Attendance;
 use Zend\Diactoros\Response\RedirectResponse;
 
@@ -15,10 +15,10 @@ class RoleCallController extends BaseController
             // if the user is not a teacher
             return $this->redirectTypeUser($_SESSION['userType']);
 
-        $classes = new Classe();
+        $classes = new ClassRoom();
 
         return $this->renderHTML('rolecall.twig', [
-            'classes' => $classes->getClassesTeacher($_SESSION['userId']),
+            'classes' => $classes->getClassRoomsTeacher($_SESSION['userId']),
             'login' => [
                 "name" => $_SESSION['userName']
             ]
@@ -32,10 +32,10 @@ class RoleCallController extends BaseController
             // if the user is not a teacher
             return $this->redirectTypeUser($_SESSION['userType']);
         
-        $classe = new Classe();
+        $classe = new ClassRoom();
 
         return $this->renderHTML('rolecall.show.twig', [
-            'class' => $classe->getClassTeacher($request->getAttribute('class_id'), $_SESSION['userId']),
+            'class' => $classe->getClassTeacher($request->getAttribute('class_room_id'), $_SESSION['userId']),
             'login' => [
                 "name" => $_SESSION['userName']
             ]
@@ -48,10 +48,10 @@ class RoleCallController extends BaseController
             // if the user is not a teacher
             return $this->redirectTypeUser($_SESSION['userType']);
         
-        $classe = new Classe();
+        $class = new ClassRoom();
      
         return $this->renderHTML('rolecall.create.twig', [
-            'class' => $classe->getClassTeacher($request->getAttribute('class_id'), $_SESSION['userId']),
+            'class' => $class->getClassTeacher($request->getAttribute('class_room_id'), $_SESSION['userId']),
             // TODO: Validate if the current date is stored in the database
             'current_date' => date('Y') . '-' . date('m') . '-' . date('d'),
             'login' => [
@@ -66,7 +66,7 @@ class RoleCallController extends BaseController
             // if the user is not a teacher
             return $this->redirectTypeUser($_SESSION['userType']);
 
-        $class_id = (int) $request->getAttribute('class_id'); 
+        $class_room_id = (int) $request->getAttribute('class_room_id'); 
         
         if ($request->getMethod() == 'POST') {
             $postData = $request->getParsedBody();
@@ -76,10 +76,10 @@ class RoleCallController extends BaseController
             // the date is deleted to have just the attendance of each student
             unset($postData['date']);
 
-            // if there are data whit the same class_id and date
+            // if there are data whit the same class_room_id and date
             // the data is not stored
             $conditionals = [
-                "class_id = $class_id",
+                "class_room_id = $class_room_id",
                 "date = $date"
             ];
             if (!empty($attendance->getWhere($conditionals)))
@@ -90,7 +90,7 @@ class RoleCallController extends BaseController
             foreach ($postData as $key => $data) {
                 // TODO: Optimize the code, here an array whit the same values are created
                 $data = [
-                    "class_id" => $class_id,
+                    "class_room_id" => $class_room_id,
                     "student_id" => $key,
                     "date" => $date,
                     "type_attendance_id" => $data,
@@ -100,7 +100,7 @@ class RoleCallController extends BaseController
 
             $storeSuccessful = true;
             if ($storeSuccessful) {
-                return new RedirectResponse("/rolecall/show/$class_id");
+                return new RedirectResponse("/rolecall/show/$class_room_id");
             }
         }
         return $this->renderHTML('rolecall.create.twig', [
@@ -118,7 +118,7 @@ class RoleCallController extends BaseController
 
         return $this->renderHTML('rolecall.show.edit.twig', [
             'class' => $attendance->getAttendance(
-                (int) $request->getAttribute('class_id'),
+                (int) $request->getAttribute('class_room_id'),
                 (int) $request->getAttribute('student_id')
             ),
             'login' => [
@@ -136,13 +136,13 @@ class RoleCallController extends BaseController
             if ($request->getMethod() == 'POST') {
             $postData = $request->getParsedBody();
             $attendance = new Attendance();
-            $class_id = (int) $request->getAttribute('class_id');
+            $class_room_id = (int) $request->getAttribute('class_room_id');
             $student_id = (int) $request->getAttribute('student_id');
 
             foreach ($postData as $key => $data) {
                 $updates = ["type_attendance_id = $data"];
                 $conditionals = [
-                    "class_id = $class_id",
+                    "class_room_id = $class_room_id",
                     "student_id = $student_id",
                     // date has '' because it is a String
                     "date = '$key'"
@@ -152,7 +152,7 @@ class RoleCallController extends BaseController
             
             $updateSuccessful = true;
             if ($updateSuccessful) {
-                return new RedirectResponse("/rolecall/show/$class_id");
+                return new RedirectResponse("/rolecall/show/$class_room_id");
             }
         }
         return $this->renderHTML('rolecall.show.edit.twig', [

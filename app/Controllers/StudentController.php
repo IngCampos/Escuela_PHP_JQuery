@@ -14,7 +14,7 @@ class StudentController extends BaseController
 
         $classes = new User();
         return $this->renderHTML('student.twig', [
-            'classes' => $classes->getClassesStudent($_SESSION['userId']),
+            'classes' => $classes->getClassRoomsStudent($_SESSION['userId']),
             'login' => [
                 "name" => $_SESSION['userName']
             ]
