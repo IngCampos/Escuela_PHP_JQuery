@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Login;
 use App\Models\Logout;
 use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Diactoros\ServerRequest;
 
 class LoginController extends BaseController
 {
@@ -16,12 +17,10 @@ class LoginController extends BaseController
 
         $allowToLogin = true;
 
-        return $this->renderHTML('login.twig', [
-            'allow_to_login' => $allowToLogin
-        ]);
+        return $this->renderHTML('login.twig', compact('allowToLogin'));
     }
 
-    public function login($request)
+    public function login(ServerRequest $request)
     {
         // TODO: Implement a logic to set a time in the section as the first version worked
         if ($request->getMethod() == 'POST') {
@@ -47,7 +46,7 @@ class LoginController extends BaseController
 
         return $this->renderHTML('login.twig', [
             'errors' => ['Password or id are wrong.'],
-            'allow_to_login' => true
+            'allowToLogin' => true
         ]);
     }
 

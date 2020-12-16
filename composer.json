@@ -1,6 +1,6 @@
 {
-    "name": "martin-stepwolf/php-attendance-school",
-    "description": "School system for attendances.",
+    "name": "martin-stepwolf/php-school-rollcall",
+    "description": "Website for attendance optimization in a generic school",
     "type": "project",
     "autoload": {
         "psr-4": {

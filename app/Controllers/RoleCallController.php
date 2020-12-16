@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\ClassRoom;
 use App\Models\Attendance;
 use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Diactoros\ServerRequest;
 
 class RoleCallController extends BaseController
 {
@@ -25,7 +26,7 @@ class RoleCallController extends BaseController
         ]);
     }
 
-    public function show($request)
+    public function show(ServerRequest $request)
     {
         // TODO: Implement security if the teacher access to a class that does not belong him/her
         if ($_SESSION['userType'] != 2)
@@ -42,7 +43,7 @@ class RoleCallController extends BaseController
         ]);
     }
 
-    public function create($request)
+    public function create(ServerRequest $request)
     {
         if ($_SESSION['userType'] != 2)
             // if the user is not a teacher
@@ -60,7 +61,7 @@ class RoleCallController extends BaseController
         ]);
     }
 
-    public function store($request)
+    public function store(ServerRequest $request)
     {
         if ($_SESSION['userType'] != 2)
             // if the user is not a teacher
@@ -108,7 +109,7 @@ class RoleCallController extends BaseController
         ]);
     }
 
-    public function showEdit($request)
+    public function showEdit(ServerRequest $request)
     {
         if ($_SESSION['userType'] != 2)
             // if the user is not a teacher
@@ -127,7 +128,7 @@ class RoleCallController extends BaseController
         ]);
     }
 
-    public function showUpdate($request)
+    public function showUpdate(ServerRequest $request)
     {
         if ($_SESSION['userType'] != 2)
             // if the user is not a teacher

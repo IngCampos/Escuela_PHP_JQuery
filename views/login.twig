@@ -6,11 +6,11 @@
 
 <form class="form" action="/login" method="POST">
 	<div class="form-group">
-		<i class="icon left fa fa-user"></i><input class="user" type="number" name="id" placeholder="Id" required {% if not allow_to_login %} disabled {% endif%}>
+		<i class="icon left fa fa-user"></i><input class="user" type="number" name="id" placeholder="Id" required {% if not allowToLogin %} disabled {% endif%}>
 	</div>
 	<div class="form-group">
-		<i class="icon left fa fa-lock"></i><input class="password_btn" type="password" name="password" placeholder="Password" value="school" required {% if not allow_to_login %} disabled {% endif%}>
-		<button type="submit" class="submit-btn fa fa-arrow-right" {% if not allow_to_login %} disabled {% endif%}></button>
+		<i class="icon left fa fa-lock"></i><input class="password_btn" type="password" name="password" placeholder="Password" value="school" required {% if not allowToLogin %} disabled {% endif%}>
+		<button type="submit" class="submit-btn fa fa-arrow-right" {% if not allowToLogin %} disabled {% endif%}></button>
 	</div>
 </form>
 

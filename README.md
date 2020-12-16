@@ -5,12 +5,12 @@ _Website for attendance optimization in a generic school._
 ### Project goal by martin-stepwolf :goal_net:
 
 Project developed in a subject when I was student.
-As better developer **I rebuilt all the project** whit my better skills.
+As better developer **I rebuilt all the project** with my better skills.
 
 ### Achievements :star2:
 
 As IT student, I knew already about databases and PHP vanilla.
-Now I know **composer** and I have worked whit Laravel and Symfony I improved the project whit:
+Now I know **composer** and I have worked with Laravel and Symfony I improved the project with:
 
 - Configure **composer** to respect [PSR4](https://www.php-fig.org/psr/psr-4/) standard.
 - Install and configure third party packages and respect [PSR7](https://www.php-fig.org/psr/psr-7/) standard.
@@ -29,7 +29,7 @@ These instructions will get you a copy of the project up and running on your loc
 The programs you need are:
 
 -   [Composer](https://getcomposer.org/download/).
--   Database ([MySQL](https://www.mysql.com/)) and a web server whit PHP 7.
+-   Database ([MySQL](https://www.mysql.com/)) and a web server with PHP 7.1.
 
 ### Installing 🔧
 
@@ -86,6 +86,7 @@ This personal project is licensed under the [MIT License](https://choosealicense
 
 ## References :books:
 
+- [PHP advance course 2018 - Course for better features](https://platzi.com/clases/php-avanzado/)
 - [PHP introduction course 2018 - Course for remastering](https://platzi.com/clases/php/)
 - [PHP framework introduction course](https://platzi.com/clases/php-frameworks/)
 - [Oriented Object Programming in PHP - Course for creating better Models and Controllers](https://platzi.com/clases/php-poo/)
