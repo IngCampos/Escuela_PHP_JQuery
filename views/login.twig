@@ -4,16 +4,15 @@
 
 {% block body %}
 
-<form class="form" action="/login" method="POST">
-	<div class="form-group">
-		<i class="icon left fa fa-user"></i><input class="user" type="number" name="id" placeholder="Id" required {% if not allowToLogin %} disabled {% endif%}>
+<form class="form-login" action="/login" method="POST">
+	<div class="form-login-group">
+		<i class="icon left fa fa-user"></i><input type="number" name="id" placeholder="Id" required {% if not allowToLogin %} disabled {% endif%}>
 	</div>
-	<div class="form-group">
+	<div class="form-login-group">
 		<i class="icon left fa fa-lock"></i><input class="password_btn" type="password" name="password" placeholder="Password" value="school" required {% if not allowToLogin %} disabled {% endif%}>
 		<button type="submit" class="submit-btn fa fa-arrow-right" {% if not allowToLogin %} disabled {% endif%}></button>
 	</div>
 </form>
-
 
 <center>
 	"school" is the password by default.<br>

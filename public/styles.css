@@ -1,137 +1,141 @@
-/* TODO: Implement webpack to process css and possible javascript code */
+:root {
+  --bg-main: url(background.png);
+  --main-color: #5F0D0C;
+  --text-color: #EADDC7;
+  --href-main-color: #AB1916;
+  --href-secondary-color: #AB4B49;
+  --secondary-color: #783534;
+}
+
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: 'Amiri', serif;
 }
 
 body {
-  font-size: 16px;
   font-family: "Raleway", sans-serif;
-  background: #1b1d35;
-  color: #fff;
+  background: var(--bg-main);
+  max-width: 32rem;
+  margin: auto;
+}
+
+header{
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+header h1 {
+  text-align: center;
+  margin: 1rem 0rem;
+}
+
+header nav {
+  color: var(--href-main-color);
+}
+
+header nav a:hover, footer a:hover {
+  text-decoration: underline;
+  color: var(--main-color);
+}
+
+header hr {
+  border: none;
+  border-top: .5rem solid var(--main-color);
+}
+
+main {
+  margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.section-name {
+  text-align: center;
+  margin: .5rem 0;
+  color: var(--secondary-color);
+}
+
+.form-login {
+  background: var(--secondary-color);
+  padding: 2rem;
+}
+
+.form-login .form-login-group {
+  width: 100%;
+  margin-bottom: .5rem;
+}
+
+.form-login input{
+  padding: .7rem;
+  font-size: 1.2rem;
+  border: none;
+  color: var(--main-color);
+}
+
+.form-login .icon {
+  padding: 1rem;
+  text-align: center;
+  width: 4rem;
+  height: 3.3rem;
+  font-size: 1.2rem;
+  background: var(--text-color);
+  color: var(--secondary-color);
+  border-radius: 3px;
+}
+
+.form-login .icon.left {
+  margin-right: .2rem;
+}
+
+.form-login input {
+  width: calc(100% - 4.5rem);
+  border-radius: 3px;
+}
+
+.form-login .password_btn {
+  width: calc(100% - 8.8rem);
+  border-radius: 3px;
+}
+
+.form-login .submit-btn {
+  padding: 1rem;
+  height: 3.3rem;
+  width: 4rem;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  background: var(--main-color);
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: 3px;
+}
+.form-login .submit-btn:hover {
+  background: var(--text-color);
+  color: var(--main-color);
+}
+
+table {
+  width: 100%;
 }
 
 a {
   text-decoration: none;
-  color: #b8711b;
+  color: var(--href-secondary-color);
 }
 
 a:hover {
   text-decoration: underline;
+  color: var(--text-color);
 }
 
-.container {
-  max-width: 500px;
-  width: 90%;
-  margin: auto;
+.content {
+  padding: 2rem;
+  background: var(--secondary-color);
+  border-radius: 3px;
 }
 
-.title {
-  font-weight: 300;
-  color: #b8711b;
+footer {
   text-align: center;
-  margin: 60px 0 30px 0;
-}
-
-.border {
-  border: none;
-  margin-bottom: 5px;
-  border-top: 10px solid #b8711b;
-  background: none;
-  color: none;
-}
-
-.form {
-  background: #2c2c47;
-  padding: 30px;
-  margin-bottom: 30px;
-}
-
-.form .form-group {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.form input[type="number"],
-.form input[type="password"] {
-  padding: 15px;
-  font-size: 18px;
-  line-height: 18px;
-  border: none;
-  vertical-align: top;
-}
-
-.form .icon {
-  padding: 15px;
-  text-align: center;
-  width: 48px;
-  max-height: 48px;
-  font-size: 18px;
-  line-height: 18px;
-  background: #c8c8c8;
-  display: inline-block;
-  color: #6b6b6b;
-  vertical-align: top;
-}
-
-.form .icon.left {
-  margin-right: 4px;
-  -webkit-border-radius: 3px 0 0 3px;
-  -moz-border-radius: 3px 0 0 3px;
-  -ms-border-radius: 3px 0 0 3px;
-  -o-border-radius: 3px 0 0 3px;
-  border-radius: 3px 0 0 3px;
-}
-
-.form .user,
-.form .password {
-  width: calc(100% - 52px);
-  -webkit-border-radius: 0 3px 3px 0;
-  -moz-border-radius: 0 3px 3px 0;
-  -ms-border-radius: 0 3px 3px 0;
-  -o-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
-}
-
-.form .password_btn {
-  width: calc(100% - 105px);
-}
-
-.form .error ul {
-  padding: 0 15px;
-}
-
-.form .error ul li {
-  margin-bottom: 10px;
-}
-
-.content article {
-  padding: 30px;
-  background: #fff;
-}
-
-.content article p {
-  margin-bottom: 10px;
-  color: #000;
-}
-
-.submit-btn {
-  padding: 15px;
-  text-align: center;
-  width: 48px;
-  max-height: 48px;
-  font-size: 18px;
-  line-height: 18px;
-  background: #679863;
-  display: inline-block;
-  color: #fff;
-  cursor: pointer;
-  -webkit-border-radius: 0 3px 3px 0;
-  -moz-border-radius: 0 3px 3px 0;
-  -ms-border-radius: 0 3px 3px 0;
-  -o-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
+  color: var(--main-color);
+  font-weight: bold;
 }

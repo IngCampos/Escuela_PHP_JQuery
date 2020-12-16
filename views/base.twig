@@ -6,30 +6,32 @@
 	<meta name="viewport"
 		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/styles.css">
-	<title>Roll Call System PHP</title>
+	<link rel="stylesheet" media="(max-width: 510px)" href="mobile.css" />
+	<title>PHP School Rollcall</title>
 </head>
 
 <body>
-	<div class="container">
-		<h1 class="title">Roll Call System PHP</h1>
-		{% if login %}
+	<header>
+		<h1>PHP School Rollcall</h1>
 		<nav>
+			{% if login %}
 			<p>User: {{ login.name }}</p>
 			<a href="/">Index</a><a style="float: right;" href="/logout">Logout</a>
+			{% endif%}
 		</nav>
-		{% endif%}
-		<hr class="border">
-		<h2>
-			<center>
-				{% block section %}{% endblock %}
-			</center>
+		<hr>
+	</header>
+	<main>
+		<h2 class="section-name">
+			{% block section %}{% endblock %}
 		</h2>
-		<div class="content">
+		<div class="content" style="overflow-x:auto;">
 			{% block body %}{% endblock %}
 			{% if errors is defined %}
-			<div>
+			<div class="errors">
 				<p>Errors:</p>
 				{% for error in errors %}
 				<li>{{ error }}</li>
@@ -37,11 +39,10 @@
 			</div>
 			{% endif %}
 		</div>
-	</div>
+	</main>
 	<footer>
-		<center>
-			Roll Call System PHP
-		</center>
+		Personal project by <a href="https://www.martin-stepwolf.com/" target="_blank" rel="noopener noreferrer">martin-stepwolf</a>. <br>
+		<a href="https://github.com/martin-stepwolf/php-school-rollcall" target="_blank" rel="noopener noreferrer">Source code</a>.
 	</footer>
 </body>
 
