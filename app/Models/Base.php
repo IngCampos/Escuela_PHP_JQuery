@@ -15,7 +15,7 @@ class Base
     {
         try {
             $this->db = new PDO(
-                "mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_DATABASE']}",
+                "{$_ENV['DB_DRIVER']}:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_DATABASE']}",
                 "{$_ENV['DB_USERNAME']}",
                 "{$_ENV['DB_PASSWORD']}"
             );

@@ -1,11 +1,13 @@
-# PHP School Rollcall
+# PHP School Rollcall 
 
 _Website for attendance optimization in a generic school._
+
+---------------------
 
 ### Project goal by martin-stepwolf :goal_net:
 
 Project developed in a subject when I was student.
-As better developer **I rebuilt all the project** with my better skills.
+As better developer **I remade all the project** with my better skills.
 
 ### Achievements :star2:
 
@@ -19,6 +21,7 @@ Now I know **composer** and I have worked with Laravel and Symfony I improved th
 - Implement Twig in order to have **better views**.
 - Improve the URL as /rolecall/{class_room_id} instead of /rolecall?class_room_id=*.
 - Implement **library for database management** instead of load a SQL script.
+- Improve the design, color palette and HTML semantic.
 
 ## Getting Started :rocket:
 
@@ -67,6 +70,8 @@ php -S localhost:8080
 
 ### Main functionality ⚙️
 
+Visit the website in [Heroku](https://php-school-rollcall.herokuapp.com/) to try the website.
+
 - In the login there are the ids and password by default to log in.
 - Administrator can watch all the users.
 - Students can watch its class rooms and its attendances.
@@ -74,7 +79,7 @@ php -S localhost:8080
 
 ## Authors
 
--   Martín Campos - _Initial work_ [martin-stepwolf](https://github.com/martin-stepwolf)
+-   Martín Campos - [martin-stepwolf](https://github.com/martin-stepwolf)
 
 ## Contributing
 
