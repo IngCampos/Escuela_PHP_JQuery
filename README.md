@@ -22,6 +22,7 @@ Now I know **composer** and I have worked with Laravel and Symfony I improved th
 - Improve the URL as /rolecall/{class_room_id} instead of /rolecall?class_room_id=*.
 - Implement **library for database management** instead of load a SQL script.
 - Improve the design, color palette and HTML semantic.
+- Implement docker and docker compose for a better environment.
 
 ## Getting Started :rocket:
 
@@ -31,42 +32,45 @@ These instructions will get you a copy of the project up and running on your loc
 
 The programs you need are:
 
--   [Composer](https://getcomposer.org/download/).
--   Database ([MySQL](https://www.mysql.com/)) and a web server with PHP 7.1.
+-   [Docker](https://www.docker.com/get-started).
+-   [Docker compose](https://docs.docker.com/compose/install/).
 
 ### Installing 🔧
 
-First duplicate the file .env.example as .env and set your credential for the database in.
+First duplicate the file .env.example as .env.
 
 ```
-DB_DRIVER=mysql
-DB_HOST=localhost
-DB_DATABASE=name
-DB_USERNAME=root
-DB_PASSWORD=
-DB_PORT=3306
+cp .env.example .env
+```
+
+Note: You could change some values, anyway docker-compose create the database according to the defined values.
+
+Create the image (php:7.4-composer-npm) and run the services (php, nginx and mysql):
+
+```
+docker-compose up
+```
+
+Note: The next steps can be automated by running
+
+```
+sh ./install.sh
 ```
 
 Then install the PHP packages.
 
 ```
-composer install
+docker-compose exec app composer install
 ```
 
-Then generate the database and fill it with testing data:
+Finally generate the database and fill it with testing data:
 
 ```
-vendor\bin\phinx migrate
-vendor\bin\phinx seed:run
+docker-compose exec app vendor/bin/phinx migrate
+docker-compose exec app vendor/bin/phinx seed:run
 ```
 
-
-Finally run the server:
-
-```
-cd public
-php -S localhost:8080
-```
+And now you have all the environment, the nginx server is in the port 8000 (e.g http://127.0.0.1:8000/)
 
 ### Main functionality ⚙️
 
@@ -91,6 +95,8 @@ This personal project is licensed under the [MIT License](https://choosealicense
 
 ## References :books:
 
+- [Tutorial Laravel with Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-laravel-with-docker-compose-on-ubuntu-20-04)
+- [Docker course](https://platzi.com/clases/docker/)
 - [PHP advance course 2018 - Course for better features](https://platzi.com/clases/php-avanzado/)
 - [PHP introduction course 2018 - Course for remastering](https://platzi.com/clases/php/)
 - [PHP framework introduction course](https://platzi.com/clases/php-frameworks/)

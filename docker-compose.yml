@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  #PHP Service
+  app:
+    build:
+      args:
+        user: user
+        uid: 1000
+      context: .
+      dockerfile: Dockerfile
+    image: php:7.4-fpm-composer
+    container_name: phpschoolrc-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - phpschoolrc
+
+  #Nginx Service
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: phpschoolrc-nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - phpschoolrc
+
+  #MySQL Service
+  db:
+    image: mysql:5.7
+    container_name: phpschoolrc-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    depends_on: 
+      - app # because of app has the environment values
+    networks:
+      - phpschoolrc
+
+#Docker Networks
+networks:
+  phpschoolrc:
+    driver: bridge
