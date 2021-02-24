@@ -1,28 +1,25 @@
-# PHP School Rollcall 
+# PHP School Rollcall ![Status](https://img.shields.io/badge/status-in_rafactoring-yellowgreen) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green)
 
 _Website for attendance optimization in a generic school._
 
----------------------
-
 ### Project goal by martin-stepwolf :goal_net:
 
-Project developed in a subject when I was student.
-As better developer **I remade all the project** with my better skills.
+This was a [project developed](https://github.com/martin-stepwolf/php-school-rollcall/releases/tag/v1.0.0) in a subject when I was student.
+Now **I refactored all the project** with better practices, similar to professional framework.
 
 ### Achievements :star2:
 
-As IT student, I knew already about databases and PHP vanilla.
-Now I know **composer** and I have worked with Laravel and Symfony I improved the project with:
+- Configured **composer** to respect [PSR4](https://www.php-fig.org/psr/psr-4/) standard.
+- Installed third party packages and respect [PSR7](https://www.php-fig.org/psr/psr-7/) standard.
+- Implemented **Model-View-Controller pattern** and **Front Controller**.
+- Implemented a basic ORM using OOP and SQL queries.
+- Implemented Twig in order to have better views.
+- Improved the URLs (/rolecall/{class_room_id} instead of /rolecall?class_room_id=*).
+- Implemented library for database management (migrations and seeders).
+- Improved the design, palette colors and HTML semantic.
+- Implemented docker compose for a better environment.
 
-- Configure **composer** to respect [PSR4](https://www.php-fig.org/psr/psr-4/) standard.
-- Install and configure third party packages and respect [PSR7](https://www.php-fig.org/psr/psr-7/) standard.
-- Implement **Model-View-Controller pattern** and **Front Controller**.
-- **Create a basic ORM(instead of use Eloquent and use the initial way to access to the database), using OOP and SQL queries**.
-- Implement Twig in order to have **better views**.
-- Improve the URL as /rolecall/{class_room_id} instead of /rolecall?class_room_id=*.
-- Implement **library for database management** instead of load a SQL script.
-- Improve the design, color palette and HTML semantic.
-- Implement docker and docker compose for a better environment.
+---
 
 ## Getting Started :rocket:
 
@@ -70,9 +67,11 @@ docker-compose exec app vendor/bin/phinx migrate
 docker-compose exec app vendor/bin/phinx seed:run
 ```
 
-And now you have all the environment, the nginx server is in the port 8000 (e.g http://127.0.0.1:8000/)
+And now you have all the environment, the nginx server is in the port 8000 (e.g http://127.0.0.1:8000/).
 
-### Main functionality ⚙️
+---
+
+## Functionality ⚙️
 
 Visit the website in [Heroku](https://php-school-rollcall.herokuapp.com/) to try the website.
 
@@ -81,19 +80,21 @@ Visit the website in [Heroku](https://php-school-rollcall.herokuapp.com/) to try
 - Students can watch its class rooms and its attendances.
 - Teachers can  watch its class rooms, pass the role and edit an attendance.
 
-## Authors
+---
 
--   Martín Campos - [martin-stepwolf](https://github.com/martin-stepwolf)
+### Authors
 
-## Contributing
+- Martín Campos - [martin-stepwolf](https://github.com/martin-stepwolf)
 
-You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/php-roll-call/issues) and/or [pull requests](https://github.com/martin-stepwolf/php-roll-call/pulls). There are many TODOs to improve the project.
+### Contributing
 
-## License
+You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/php-roll-call/issues) and/or [pull requests](https://github.com/martin-stepwolf/php-roll-call/pulls).
+
+### License
 
 This personal project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-## References :books:
+### References :books:
 
 - [Tutorial Laravel with Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-set-up-laravel-with-docker-compose-on-ubuntu-20-04)
 - [Docker course](https://platzi.com/clases/docker/)
