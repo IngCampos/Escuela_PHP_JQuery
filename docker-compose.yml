@@ -8,7 +8,7 @@ services:
         user: user
         uid: 1000
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/app/Dockerfile
     image: php:7.4-fpm-composer
     container_name: phpschoolrc-app
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
       - "8000:80"
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d
+      - ./docker/nginx:/etc/nginx/conf.d
     networks:
       - phpschoolrc
 
@@ -51,6 +51,8 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    volumes:
+      - 'mysql:/var/lib/mysql'
     depends_on: 
       - app # because of app has the environment values
     networks:
@@ -60,3 +62,8 @@ services:
 networks:
   phpschoolrc:
     driver: bridge
+
+#Volumes to store system data
+volumes:
+  mysql:
+      driver: local

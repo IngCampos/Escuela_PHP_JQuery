@@ -4,8 +4,8 @@ _Website for attendance optimization in a generic school._
 
 ### Project goal by martin-stepwolf :goal_net:
 
-This was a [project developed](https://github.com/martin-stepwolf/php-school-rollcall/releases/tag/v1.0.0) in a subject when I was student.
-Now **I refactored all the project** with better practices, similar to professional framework.
+This was a [project developed](https://github.com/martin-stepwolf/php-school-rollcall/tree/3c5f1bb4af2f09d55142fba9c01f919fd1b72030) in a subject when I was student.
+Now **I refactored all the project** with better practices (MVC, Composer, etc), similar to professional framework.
 
 ### Achievements :star2:
 
@@ -15,7 +15,7 @@ Now **I refactored all the project** with better practices, similar to professio
 - Implemented a basic ORM using OOP and SQL queries.
 - Implemented Twig in order to have better views.
 - Improved the URLs (/rolecall/{class_room_id} instead of /rolecall?class_room_id=*).
-- Implemented library for database management (migrations and seeders).
+- Implemented libraries for database management (migrations and seeders).
 - Improved the design, palette colors and HTML semantic.
 - Implemented docker compose for a better environment.
 
@@ -48,26 +48,30 @@ Create the image (php:7.4-composer-npm) and run the services (php, nginx and mys
 docker-compose up
 ```
 
-Note: The next steps can be automated by running
+Note: You can run the last command in the background with `docker-compose up -d`.
+
+Now you have all the environment ready, for the next commands you need to be inside of the app container with:
 
 ```
-sh ./install.sh
+docker-compose exec app /bin/bash
 ```
 
 Then install the PHP packages.
 
 ```
-docker-compose exec app composer install
+composer install
 ```
 
 Finally generate the database and fill it with testing data:
 
 ```
-docker-compose exec app vendor/bin/phinx migrate
-docker-compose exec app vendor/bin/phinx seed:run
+vendor/bin/phinx migrate
+vendor/bin/phinx seed:run
 ```
 
-And now you have all the environment, the nginx server is in the port 8000 (e.g http://127.0.0.1:8000/).
+And now you have all the environment in the port 8000.
+
+Note: Use `exit` command to exit from the container, `docker-compose down` to delete the containers and `docker volume rm php-school-rollcall_mysql` to delete the database volume.
 
 ---
 
