@@ -1,5 +1,5 @@
 {
-    "name": "martin-stepwolf/php-school-rollcall",
+    "name": "mascam97/php-school-rollcall",
     "description": "Website for attendance optimization in a generic school",
     "type": "project",
     "autoload": {
@@ -18,7 +18,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "martin-stepwolf"
+            "name": "mascam97"
         }
     ]
 }

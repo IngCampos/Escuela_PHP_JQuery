@@ -1,11 +1,13 @@
-# PHP School Rollcall ![Status](https://img.shields.io/badge/status-in_rafactoring-yellowgreen) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green)
+# PHP School Rollcall ![Status](https://img.shields.io/badge/status-no_longer_maintained-orange) ![Passing](https://img.shields.io/badge/build-passing-green) ![Docker build](https://img.shields.io/badge/docker_build-passing-green)
 
 _Website for attendance optimization in a generic school._
 
-### Project goal by martin-stepwolf :goal_net:
+### Project goal by mascam97
 
-This was a [project developed](https://github.com/martin-stepwolf/php-school-rollcall/tree/3c5f1bb4af2f09d55142fba9c01f919fd1b72030) in a subject when I was student.
+This was a [project developed](https://github.com/mascam97/php-school-rollcall/tree/3c5f1bb4af2f09d55142fba9c01f919fd1b72030) with vanilla PHP in a subject when I was student.
 Now **I refactored all the project** with better practices (MVC, Composer, etc), similar to professional framework.
+
+Due to this project does not have testing, is not deployed anymore and does not have more purposes, is no longer maintained.
 
 ### Achievements :star2:
 
@@ -77,8 +79,6 @@ Note: Use `exit` command to exit from the container, `docker-compose down` to de
 
 ## Functionality ⚙️
 
-Visit the website in [Heroku](https://php-school-rollcall.herokuapp.com/) to try the website.
-
 - In the login there are the ids and password by default to log in.
 - Administrator can watch all the users.
 - Students can watch its class rooms and its attendances.
@@ -88,11 +88,11 @@ Visit the website in [Heroku](https://php-school-rollcall.herokuapp.com/) to try
 
 ### Authors
 
-- Martín Campos - [martin-stepwolf](https://github.com/martin-stepwolf)
+- Martín S. Campos - [mascam97](https://github.com/mascam97)
 
 ### Contributing
 
-You're free to contribute to this project by submitting [issues](https://github.com/martin-stepwolf/php-roll-call/issues) and/or [pull requests](https://github.com/martin-stepwolf/php-roll-call/pulls).
+You're free to contribute to this project by submitting [issues](https://github.com/mascam97/php-roll-call/issues) and/or [pull requests](https://github.com/mascam97/php-roll-call/pulls).
 
 ### License
 
